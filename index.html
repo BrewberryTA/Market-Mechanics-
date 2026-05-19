@@ -267,9 +267,9 @@ body{background:var(--black);color:var(--text);font-family:var(--FB);font-size:1
   </div>
   <nav class="sb-nav">
     <div class="nav-g">Prologue</div>
-    <div class="ni" data-g="12"><div class="ni-num">P</div><div><div class="ni-title">How We Got Here</div><div class="ni-sub">The playbook applied to Bitcoin</div></div></div>
+    <div class="ni on" data-g="12"><div class="ni-num">P</div><div><div class="ni-title">How We Got Here</div><div class="ni-sub">The playbook applied to Bitcoin</div></div></div>
     <div class="nav-g">Foundation</div>
-    <div class="ni on" data-g="0"><div class="ni-num">00</div><div><div class="ni-title">The Illusion</div><div class="ni-sub">What Bitcoin became vs. what it was built to be</div></div></div>
+    <div class="ni" data-g="0"><div class="ni-num">00</div><div><div class="ni-title">The Illusion</div><div class="ni-sub">What Bitcoin became vs. what it was built to be</div></div></div>
     <div class="ni" data-g="1"><div class="ni-num">01</div><div><div class="ni-title">Meet the Players</div><div class="ni-sub">Who is at the table and what they carry</div></div></div>
     <div class="ni" data-g="2"><div class="ni-num">02</div><div><div class="ni-title">What is Leverage?</div><div class="ni-sub">The weapon most retail don't understand</div></div></div>
     <div class="nav-g">The Instruments</div>
@@ -292,7 +292,7 @@ body{background:var(--black);color:var(--text);font-family:var(--FB);font-size:1
 <main class="main">
 
 <!-- S00 -->
-<div class="sec on" id="s0">
+<div class="sec" id="s0">
   <div class="hero" data-n="00">
     <div class="h-brand">Brewberry's Market Structure 101 · Module 00</div>
     <div class="h-title">The Illusion</div>
@@ -354,6 +354,53 @@ body{background:var(--black);color:var(--text);font-family:var(--FB);font-size:1
       <div style="font-size:16px;color:var(--text2);line-height:1.8;font-weight:400;">Whether we like it or not, Bitcoin's primary measurable function in 2025 is as a mechanism for generating fiat-denominated returns through leveraged speculation. The participants winning in this market are not exiting the dollar system — they are using Bitcoin's volatility as the raw material to extract dollars more efficiently than almost any other instrument allows.<br><br>
       Bitcoin's price is no longer independent of the dollar system. It moves with US equity risk sentiment. It responds to Fed policy decisions. It correlates with dollar liquidity cycles. The exit became the trade. The alternative became the instrument. The asset designed to make the financial system irrelevant is now one of its most actively traded underliers.<br><br>
       <strong style="color:var(--orange);">Two realities coexist:</strong> the protocol does what it was designed to do. The market built around it does something else entirely. This module is about that market — and why understanding it is the prerequisite for participating in it without becoming its fuel.</div>
+    </div>
+
+    <div class="sub">How The Paper Market Gets That Big</div>
+    <p class="bt">The numbers above seem impossible. $92.9 trillion in annual derivatives volume against a $1.8 trillion asset. 51x. How does a paper market become 51 times larger than the thing it's supposed to track? Three mechanisms stack on top of each other — and understanding them explains not just the size, but why the system feeds on itself.</p>
+
+    <div class="co bl">
+      <div class="co-l">Mechanism 1 — Notional Value Is Not Real Money</div>
+      <div class="co-t">When a trader posts $1,000 in margin and opens a 10x leveraged BTC perp, they control $10,000 of exposure. That $10,000 gets recorded in derivatives volume. The real capital committed is $1,000. The $92.9T figure is not $92.9T of actual capital — it is the face value of all leveraged contracts, a number that mathematically must be a multiple of real capital because leverage is the entire point.<br><br>Scale this up: the global derivatives notional outstanding exceeds all the money in the world. Not because money was created — because notional value and real capital are completely different measurements being compared as if they are the same thing. They are not. $1,000 of real capital at 10x creates $10,000 of notional volume. At 50x it creates $50,000. The paper market's size is a direct function of average leverage multiplied by actual capital. Both have grown simultaneously and continuously since 2017.</div>
+    </div>
+
+    <div class="co bl">
+      <div class="co-l">Mechanism 2 — You Don't Need Bitcoin to Move Bitcoin's Price</div>
+      <div class="co-t">This is the most important structural reality in the entire market and it is almost never explained clearly.<br><br>
+      <strong style="color:var(--text);">The entry point:</strong> A trader earns, borrows, or already holds dollars. They buy USDT — no Bitcoin involved, no spot market touched. They deposit USDT on Binance as margin. They open a 20x leveraged BTC perp long. They now control $20,000 of Bitcoin price exposure with $1,000 of USDT.<br><br>
+      At no point did a single satoshi change hands. No Bitcoin was bought. No spot market was touched. Yet this trader is now a participant in Bitcoin price discovery — their position contributes to open interest, affects funding rates, and if liquidated contributes to cascade mechanics.<br><br>
+      The paper market doesn't just leverage existing Bitcoin holders — it allows the entire global pool of dollar-denominated capital to express views on Bitcoin price without touching Bitcoin. A hedge fund in Connecticut, a retail trader in Indonesia, a prop desk in Singapore — none of them need to own Bitcoin to move its price. They need USDT and a margin account. <strong style="color:var(--text);">Bitcoin's price is being set by a market that doesn't require Bitcoin participation.</strong></div>
+    </div>
+
+    <div class="co bl">
+      <div class="co-l">Mechanism 3 — The Same Dollar Gets Reused Multiple Times</div>
+      <div class="co-t">Cross-margin accounts allow one pool of USDT collateral to simultaneously back multiple positions. A trader with $10,000 USDT on a cross-margin account can hold a BTC long, an ETH long, and a SOL long at the same time — with the same $10,000 backing all three. Each position generates notional volume. Real capital: $10,000. Notional volume recorded: potentially $150,000+.<br><br>
+      Institutions take this further. A basis trader holds $500M of spot BTC on one leg and $500M of CME futures short on the other. Both legs generate notional volume in the data. Real net capital deployed is roughly $500M. Notional volume recorded: $1B. One dollar of real capital creates two dollars of measured market activity.<br><br>
+      Perpetual futures compound this further because they never expire. A CME gold futures contract must eventually settle — forcing the position to close and resetting the notional count. A Bitcoin perp can stay open indefinitely, generating continuous daily volume counts the entire time against the same underlying collateral. A position open all year generates 365 days of volume from one margin deposit.</div>
+    </div>
+
+    <div style="background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:24px;margin:20px 0;">
+      <div style="font-family:var(--FM);font-size:10px;color:var(--text3);letter-spacing:3px;text-transform:uppercase;margin-bottom:20px;">How $1,000 of Real Capital Generates $92.9T of Market Activity — Illustrated</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;">
+        <div style="background:var(--surface3);border:1px solid var(--border);border-radius:10px;padding:16px;">
+          <div style="font-family:var(--FM);font-size:10px;color:var(--text3);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;">Real Capital Deposited</div>
+          <div style="font-family:var(--FD);font-size:36px;font-weight:900;color:var(--green);line-height:1;">$1,000</div>
+          <div style="font-size:13px;color:var(--text2);margin-top:8px;font-weight:400;line-height:1.6;">USDT posted as margin. No Bitcoin purchased. Spot market untouched.</div>
+        </div>
+        <div style="background:var(--surface3);border:1px solid var(--border);border-radius:10px;padding:16px;">
+          <div style="font-family:var(--FM);font-size:10px;color:var(--text3);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;">Position Opened at 20x</div>
+          <div style="font-family:var(--FD);font-size:36px;font-weight:900;color:var(--accent);line-height:1;">$20,000</div>
+          <div style="font-size:13px;color:var(--text2);margin-top:8px;font-weight:400;line-height:1.6;">Notional exposure created. This $20,000 is recorded in derivatives volume data.</div>
+        </div>
+        <div style="background:var(--surface3);border:1px solid var(--border);border-radius:10px;padding:16px;">
+          <div style="font-family:var(--FM);font-size:10px;color:var(--text3);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;">Position Held 365 Days</div>
+          <div style="font-family:var(--FD);font-size:36px;font-weight:900;color:var(--red);line-height:1;">$7.3M</div>
+          <div style="font-size:13px;color:var(--text2);margin-top:8px;font-weight:400;line-height:1.6;">Annual notional volume from one $1,000 deposit. Multiply by millions of traders.</div>
+        </div>
+      </div>
+      <div style="margin-top:16px;padding:14px 18px;background:var(--surface3);border-radius:8px;border-left:3px solid var(--red);">
+        <div style="font-size:14px;color:var(--text2);font-weight:400;line-height:1.7;">The $92.9T figure is not a measure of how much money is in the Bitcoin market. It is a measure of how many times leveraged capital has been deployed and redeployed against Bitcoin's price over the course of a year. The real capital base is a tiny fraction of that number. This is both how the paper market reaches its size — and why it is structurally fragile. When participants need to exit simultaneously, the real capital available to absorb the unwinding is 51 times smaller than the positions being unwound.</div>
+      </div>
     </div>
 
     <div class="sub">How Radically the Market Has Changed</div>
@@ -796,59 +843,9 @@ body{background:var(--black);color:var(--text);font-family:var(--FB);font-size:1
         <div style="font-size:13px;color:var(--text3);font-weight:400;">Calculated position size does not account for associated market order fees. Actual margin requirements may vary by exchange.</div>
       </div>
     </div>
-    <div class="sub">How The Paper Market Gets That Big</div>
-    <p class="bt">The numbers in Module 00 seem impossible. $92.9 trillion in annual derivatives volume against a $1.8 trillion asset. 51x. How does a paper market become 51 times larger than the thing it's supposed to track? Three mechanisms stack on top of each other — and understanding them explains not just the size, but why the system feeds on itself.</p>
 
-    <div class="co bl">
-      <div class="co-l">Mechanism 1 — Notional Value Is Not Real Money</div>
-      <div class="co-t">When a trader posts $1,000 in margin and opens a 10x leveraged BTC perp, they control $10,000 of exposure. That $10,000 gets recorded in derivatives volume. The real capital committed is $1,000. The $92.9T figure is not $92.9T of actual capital — it is the face value of all leveraged contracts, a number that mathematically must be a multiple of real capital because leverage is the entire point.<br><br>Scale this up: the global derivatives notional outstanding exceeds all the money in the world. Not because money was created — because notional value and real capital are completely different measurements being compared as if they are the same thing. They are not. $1,000 of real capital at 10x creates $10,000 of notional volume. At 50x it creates $50,000. The paper market's size is a direct function of average leverage multiplied by actual capital. Both have grown simultaneously and continuously since 2017.</div>
-    </div>
 
-    <div class="co bl">
-      <div class="co-l">Mechanism 2 — You Don't Need Bitcoin to Move Bitcoin's Price</div>
-      <div class="co-t">This is the most important structural reality in the entire market and it is almost never explained clearly.<br><br>
-      <strong style="color:var(--text);">The entry point:</strong> A trader earns, borrows, or already holds dollars. They buy USDT — no Bitcoin involved, no spot market touched. They deposit USDT on Binance as margin. They open a 20x leveraged BTC perp long. They now control $20,000 of Bitcoin price exposure with $1,000 of USDT.<br><br>
-      At no point did a single satoshi change hands. No Bitcoin was bought. No spot market was touched. Yet this trader is now a participant in Bitcoin price discovery — their position contributes to open interest, affects funding rates, and if liquidated contributes to cascade mechanics.<br><br>
-      The paper market doesn't just leverage existing Bitcoin holders — it allows the entire global pool of dollar-denominated capital to express views on Bitcoin price without touching Bitcoin. A hedge fund in Connecticut, a retail trader in Indonesia, a prop desk in Singapore — none of them need to own Bitcoin to move its price. They need USDT and a margin account. <strong style="color:var(--text);">Bitcoin's price is being set by a market that doesn't require Bitcoin participation.</strong></div>
-    </div>
 
-    <div class="co bl">
-      <div class="co-l">Mechanism 3 — The Same Dollar Gets Reused Multiple Times</div>
-      <div class="co-t">Cross-margin accounts allow one pool of USDT collateral to simultaneously back multiple positions. A trader with $10,000 USDT on a cross-margin account can hold a BTC long, an ETH long, and a SOL long at the same time — with the same $10,000 backing all three. Each position generates notional volume. Real capital: $10,000. Notional volume recorded: potentially $150,000+.<br><br>
-      Institutions take this further. A basis trader holds $500M of spot BTC on one leg and $500M of CME futures short on the other. Both legs generate notional volume in the data. Real net capital deployed is roughly $500M. Notional volume recorded: $1B. One dollar of real capital creates two dollars of measured market activity.<br><br>
-      Perpetual futures compound this further because they never expire. A CME gold futures contract must eventually settle — forcing the position to close and resetting the notional count. A Bitcoin perp can stay open indefinitely, generating continuous daily volume counts the entire time against the same underlying collateral. A position open all year generates 365 days of volume from one margin deposit.</div>
-    </div>
-
-    <div style="background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:24px;margin:20px 0;">
-      <div style="font-family:var(--FM);font-size:10px;color:var(--text3);letter-spacing:3px;text-transform:uppercase;margin-bottom:20px;">How $1,000 of Real Capital Generates $92.9T of Market Activity — Illustrated</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;">
-        <div style="background:var(--surface3);border:1px solid var(--border);border-radius:10px;padding:16px;">
-          <div style="font-family:var(--FM);font-size:10px;color:var(--text3);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;">Real Capital Deposited</div>
-          <div style="font-family:var(--FD);font-size:36px;font-weight:900;color:var(--green);line-height:1;">$1,000</div>
-          <div style="font-size:13px;color:var(--text2);margin-top:8px;font-weight:400;line-height:1.6;">USDT posted as margin. No Bitcoin purchased. Spot market untouched.</div>
-        </div>
-        <div style="background:var(--surface3);border:1px solid var(--border);border-radius:10px;padding:16px;">
-          <div style="font-family:var(--FM);font-size:10px;color:var(--text3);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;">Position Opened at 20x</div>
-          <div style="font-family:var(--FD);font-size:36px;font-weight:900;color:var(--accent);line-height:1;">$20,000</div>
-          <div style="font-size:13px;color:var(--text2);margin-top:8px;font-weight:400;line-height:1.6;">Notional exposure created. This $20,000 is recorded in derivatives volume data.</div>
-        </div>
-        <div style="background:var(--surface3);border:1px solid var(--border);border-radius:10px;padding:16px;">
-          <div style="font-family:var(--FM);font-size:10px;color:var(--text3);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;">Position Held 365 Days</div>
-          <div style="font-family:var(--FD);font-size:36px;font-weight:900;color:var(--red);line-height:1;">$7.3M</div>
-          <div style="font-size:13px;color:var(--text2);margin-top:8px;font-weight:400;line-height:1.6;">Annual notional volume from one $1,000 deposit. Multiply by millions of traders.</div>
-        </div>
-      </div>
-      <div style="margin-top:16px;padding:14px 18px;background:var(--surface3);border-radius:8px;border-left:3px solid var(--red);">
-        <div style="font-size:14px;color:var(--text2);font-weight:400;line-height:1.7;">The $92.9T figure is not a measure of how much money is in the Bitcoin market. It is a measure of how many times leveraged capital has been deployed and redeployed against Bitcoin's price over the course of a year. The real capital base is a tiny fraction of that number. This is both how the paper market reaches its size — and why it is structurally fragile. When participants need to exit simultaneously, the real capital available to absorb the unwinding is 51 times smaller than the positions being unwound.</div>
-      </div>
-    </div>
-
-    <div class="sub">How ETF Shares Are Created — Not a Stock Split</div>
-    <p class="bt">A natural question: can BlackRock just create more IBIT shares and dilute existing holders — like a company issuing new stock? The answer is no, and the mechanism matters.</p>
-    <div class="co bl">
-      <div class="co-l">ETF Share Creation — Creation-in-Kind</div>
-      <div class="co-t">When demand for IBIT shares exceeds supply, large institutional banks called "Authorized Participants" (JP Morgan, Goldman Sachs, etc.) deposit real Bitcoin with Coinbase Custody — the custodian. BlackRock then issues new IBIT shares in exchange. New shares only exist when real BTC backs them. This is creation-in-kind. When shares are redeemed, BTC is returned and shares are cancelled. This is why on-chain ETF wallet inflows visible on Arkham Intelligence equal real BTC purchases — but only net inflows to the fund. You buying IBIT from another investor on the stock exchange does not create new BTC demand. Only when the fund itself expands does real Bitcoin move.</div>
-    </div>
     <div class="nc"><button class="nb" data-g="1">← Previous</button><button class="nb pr" data-g="3">Next: Five Ways to Bet →</button></div>
   </div>
 </div>
@@ -886,6 +883,12 @@ body{background:var(--black);color:var(--text);font-family:var(--FB);font-size:1
           <div style="margin-top:18px;padding:13px 16px;background:var(--surface3);border-radius:10px;border-left:3px solid var(--red);"><div style="font-size:16px;color:var(--red);line-height:1.7;"><strong>The price on your chart is set by the red slice.</strong> 80% of Bitcoin's trading volume involves no actual Bitcoin changing hands.</div></div>
         </div>
       </div>
+    </div>
+    <div class="sub">How ETF Shares Are Created — Not a Stock Split</div>
+    <p class="bt">A natural question: can BlackRock just create more IBIT shares and dilute existing holders — like a company issuing new stock? The answer is no, and the mechanism matters.</p>
+    <div class="co bl">
+      <div class="co-l">ETF Share Creation — Creation-in-Kind</div>
+      <div class="co-t">When demand for IBIT shares exceeds supply, large institutional banks called "Authorized Participants" (JP Morgan, Goldman Sachs, etc.) deposit real Bitcoin with Coinbase Custody — the custodian. BlackRock then issues new IBIT shares in exchange. New shares only exist when real BTC backs them. This is creation-in-kind. When shares are redeemed, BTC is returned and shares are cancelled. This is why on-chain ETF wallet inflows visible on Arkham Intelligence equal real BTC purchases — but only net inflows to the fund. You buying IBIT from another investor on the stock exchange does not create new BTC demand. Only when the fund itself expands does real Bitcoin move.</div>
     </div>
     <div class="nc"><button class="nb" data-g="2">← Previous</button><button class="nb pr" data-g="4">Next: The Funding Engine →</button></div>
   </div>
@@ -1435,7 +1438,7 @@ body{background:var(--black);color:var(--text);font-family:var(--FB);font-size:1
 </div>
 
 <!-- S12: PROLOGUE — HOW WE GOT HERE -->
-<div class="sec" id="s12">
+<div class="sec on" id="s12">
   <div class="hero" data-n="P">
     <div class="h-brand">Brewberry's Market Structure 101 · Prologue</div>
     <div class="h-title">How We Got Here</div>
