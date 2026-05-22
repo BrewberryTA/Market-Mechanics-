@@ -780,78 +780,6 @@ body{background:var(--black);color:var(--text);font-family:var(--FB);font-size:1
     </div>
 
     <!-- CALCULATOR -->
-    <div class="sub">Position Size Calculator</div>
-    <p class="bt">Enter your trade parameters. Every output updates in real time. The minimum leverage field shows the lowest leverage you can use given your stop placement — going below it means your risk dollar amount cannot be honored by the position.</p>
-    <div style="background:var(--surface2);border:1px solid var(--border);border-radius:14px;padding:28px;margin:18px 0;max-width:800px;">
-      <div style="font-family:var(--FM);font-size:10px;color:var(--text3);letter-spacing:3px;text-transform:uppercase;margin-bottom:22px;">TRADE INPUTS</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;">
-        <div>
-          <div style="font-family:var(--FM);font-size:11px;color:var(--text3);letter-spacing:2px;margin-bottom:7px;">ACCOUNT BALANCE (USDT)</div>
-          <input id="ci-bal" type="number" value="10000" min="1" style="width:100%;background:var(--surface3);border:1px solid var(--border2);border-radius:8px;padding:12px 14px;font-family:var(--FM);font-size:16px;color:var(--text);outline:none;">
-        </div>
-        <div>
-          <div style="font-family:var(--FM);font-size:11px;color:var(--text3);letter-spacing:2px;margin-bottom:7px;">RISK % PER TRADE</div>
-          <input id="ci-risk" type="number" value="1" min="0.1" max="100" step="0.1" style="width:100%;background:var(--surface3);border:1px solid var(--border2);border-radius:8px;padding:12px 14px;font-family:var(--FM);font-size:16px;color:var(--text);outline:none;">
-        </div>
-        <div>
-          <div style="font-family:var(--FM);font-size:11px;color:var(--text3);letter-spacing:2px;margin-bottom:7px;">ASSET PRICE (USDT)</div>
-          <input id="ci-price" type="number" value="79133" min="0.01" style="width:100%;background:var(--surface3);border:1px solid var(--border2);border-radius:8px;padding:12px 14px;font-family:var(--FM);font-size:16px;color:var(--text);outline:none;">
-        </div>
-        <div>
-          <div style="font-family:var(--FM);font-size:11px;color:var(--text3);letter-spacing:2px;margin-bottom:7px;">ENTRY PRICE (USDT)</div>
-          <input id="ci-entry" type="number" value="78664" min="0.01" style="width:100%;background:var(--surface3);border:1px solid var(--border2);border-radius:8px;padding:12px 14px;font-family:var(--FM);font-size:16px;color:var(--text);outline:none;">
-        </div>
-        <div>
-          <div style="font-family:var(--FM);font-size:11px;color:var(--text3);letter-spacing:2px;margin-bottom:7px;">STOP-LOSS PRICE (USDT)</div>
-          <input id="ci-sl" type="number" value="78432" min="0.01" style="width:100%;background:var(--surface3);border:1px solid var(--border2);border-radius:8px;padding:12px 14px;font-family:var(--FM);font-size:16px;color:var(--text);outline:none;">
-        </div>
-        <div>
-          <div style="font-family:var(--FM);font-size:11px;color:var(--text3);letter-spacing:2px;margin-bottom:7px;">YOUR LEVERAGE (for position sizing)</div>
-          <input id="ci-lev" type="number" value="10" min="1" max="125" style="width:100%;background:var(--surface3);border:1px solid var(--border2);border-radius:8px;padding:12px 14px;font-family:var(--FM);font-size:16px;color:var(--text);outline:none;">
-        </div>
-      </div>
-
-      <!-- RESULTS -->
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:8px;" id="calc-results">
-        <div style="background:var(--surface3);border:1px solid var(--border);border-radius:10px;padding:16px;">
-          <div style="font-family:var(--FM);font-size:10px;color:var(--text3);letter-spacing:2px;margin-bottom:8px;">RISK AMOUNT</div>
-          <div style="font-family:var(--FD);font-size:28px;font-weight:900;color:var(--accent);" id="co-risk">$100</div>
-          <div style="font-size:12px;color:var(--text3);margin-top:4px;font-weight:400;">Max dollars you lose if SL hits</div>
-        </div>
-        <div style="background:var(--surface3);border:1px solid var(--border);border-radius:10px;padding:16px;">
-          <div style="font-family:var(--FM);font-size:10px;color:var(--text3);letter-spacing:2px;margin-bottom:8px;">S/L DISTANCE</div>
-          <div style="font-family:var(--FD);font-size:28px;font-weight:900;color:var(--blue);" id="co-slpct">0.30%</div>
-          <div style="font-size:12px;color:var(--text3);margin-top:4px;font-weight:400;">% from entry to stop</div>
-        </div>
-        <div style="background:#1a0a00;border:2px solid var(--orange);border-radius:10px;padding:16px;">
-          <div style="font-family:var(--FM);font-size:10px;color:var(--orange);letter-spacing:2px;margin-bottom:8px;">MIN. LEVERAGE</div>
-          <div style="font-family:var(--FD);font-size:28px;font-weight:900;color:var(--orange);" id="co-minlev">4x</div>
-          <div style="font-size:12px;color:var(--text3);margin-top:4px;font-weight:400;">Lowest usable leverage for this trade</div>
-        </div>
-        <div style="background:var(--surface3);border:1px solid var(--border);border-radius:10px;padding:16px;">
-          <div style="font-family:var(--FM);font-size:10px;color:var(--text3);letter-spacing:2px;margin-bottom:8px;">MARGIN USED</div>
-          <div style="font-family:var(--FD);font-size:28px;font-weight:900;color:var(--text);" id="co-margin">$681</div>
-          <div style="font-size:12px;color:var(--text3);margin-top:4px;font-weight:400;">Collateral posted for the position</div>
-        </div>
-        <div style="background:var(--surface3);border:1px solid var(--border);border-radius:10px;padding:16px;">
-          <div style="font-family:var(--FM);font-size:10px;color:var(--text3);letter-spacing:2px;margin-bottom:8px;">POSITION SIZE</div>
-          <div style="font-family:var(--FD);font-size:28px;font-weight:900;color:var(--text);" id="co-possize">$34,065</div>
-          <div style="font-size:12px;color:var(--text3);margin-top:4px;font-weight:400;">Total notional value controlled</div>
-        </div>
-        <div style="background:var(--surface3);border:1px solid var(--border);border-radius:10px;padding:16px;" id="co-lev-status-card">
-          <div style="font-family:var(--FM);font-size:10px;letter-spacing:2px;margin-bottom:8px;" id="co-lev-status-lbl">LEVERAGE STATUS</div>
-          <div style="font-family:var(--FD);font-size:20px;font-weight:900;" id="co-lev-status">✓ OK</div>
-          <div style="font-size:12px;color:var(--text3);margin-top:4px;font-weight:400;" id="co-lev-status-msg">Your leverage is at or above minimum</div>
-        </div>
-      </div>
-
-      <div style="margin-top:18px;padding:14px 18px;background:var(--surface3);border-radius:8px;border-left:3px solid var(--text3);">
-        <div style="font-family:var(--FM);font-size:10px;color:var(--text3);letter-spacing:2px;margin-bottom:6px;">DISCLAIMER</div>
-        <div style="font-size:13px;color:var(--text3);font-weight:400;">Calculated position size does not account for associated market order fees. Actual margin requirements may vary by exchange.</div>
-      </div>
-    </div>
-
-
 
     <div class="nc"><button class="nb" data-g="1">← Previous</button><button class="nb pr" data-g="3">Next: Five Ways to Bet →</button></div>
   </div>
@@ -1313,7 +1241,7 @@ body{background:var(--black);color:var(--text);font-family:var(--FB);font-size:1
         <div class="co-l">Rule 1 — Choose Your Instrument Before You Choose Your Size</div>
         <div class="co-t">Before you think about position size or leverage, ask one question first: <strong>does this trade require a derivative instrument?</strong><br><br>
         If your thesis is a directional long — you believe Bitcoin will go higher — spot removes liquidation risk entirely. On spot, you control risk through position sizing alone. A $1,000 position in a $10,000 account risks exactly $1,000 maximum. No exchange engine can force-sell you out of a 15% drawdown. Size down instead of levering up.<br><br>
-        If your thesis genuinely requires a derivative — you are shorting, hedging an existing position, or the execution structure demands a perp — then the minimum leverage is not a choice. As the calculator in Module 02 shows, your stop distance mathematically dictates the floor. A tight stop forces higher leverage. A wide stop allows lower. The rule is not "avoid leverage." The rule is: <strong>don't default to derivatives when the instrument isn't necessary for what you're trying to do.</strong></div>
+        If your thesis genuinely requires a derivative — you are shorting, hedging an existing position, or the execution structure demands a perp — then the minimum leverage is not a choice. As the Position Size Calculator in Module 11 shows, your stop distance mathematically dictates the floor. A tight stop forces higher leverage. A wide stop allows lower. The rule is not "avoid leverage." The rule is: <strong>don't default to derivatives when the instrument isn't necessary for what you're trying to do.</strong></div>
       </div>
       <div class="co rd" style="grid-column:1/-1;">
         <div class="co-l">Rule 3 — The Chart Already Tells You Where Liquidity Sits</div>
@@ -1469,6 +1397,77 @@ body{background:var(--black);color:var(--text);font-family:var(--FB);font-size:1
 
       <div style="background:#05101a;border:1px solid #1a2a4a;border-radius:8px;padding:14px 18px;">
         <div style="font-size:14px;color:#93c5fd;font-weight:400;line-height:1.7;"><strong style="color:var(--text);">The SMC connection:</strong> When you identify a high-quality setup — a sweep of a major liquidity level, a confirmed order block entry, a clean FVG fill — you are entering at a point where price has already done the work of delivering you to a precise level. The R:R available at that entry is almost always favorable precisely because the setup is specific. A stop below the order block is tight. The target at the next liquidity level is far. That is a 1:3 or better setup by definition. SMC methodology naturally produces favorable R:R when applied correctly — because the entry logic is structural, not arbitrary.</div>
+      </div>
+    </div>
+
+    <div class="sub">Position Size Calculator</div>
+    <p class="bt">Enter your trade parameters. Every output updates in real time. The minimum leverage field shows the lowest leverage you can use given your stop placement — going below it means your risk dollar amount cannot be honored by the position.</p>
+    <div style="background:var(--surface2);border:1px solid var(--border);border-radius:14px;padding:28px;margin:18px 0;max-width:800px;">
+      <div style="font-family:var(--FM);font-size:10px;color:var(--text3);letter-spacing:3px;text-transform:uppercase;margin-bottom:22px;">TRADE INPUTS</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;">
+        <div>
+          <div style="font-family:var(--FM);font-size:11px;color:var(--text3);letter-spacing:2px;margin-bottom:7px;">ACCOUNT BALANCE (USDT)</div>
+          <input id="ci-bal" type="number" value="10000" min="1" style="width:100%;background:var(--surface3);border:1px solid var(--border2);border-radius:8px;padding:12px 14px;font-family:var(--FM);font-size:16px;color:var(--text);outline:none;">
+        </div>
+        <div>
+          <div style="font-family:var(--FM);font-size:11px;color:var(--text3);letter-spacing:2px;margin-bottom:7px;">RISK % PER TRADE</div>
+          <input id="ci-risk" type="number" value="1" min="0.1" max="100" step="0.1" style="width:100%;background:var(--surface3);border:1px solid var(--border2);border-radius:8px;padding:12px 14px;font-family:var(--FM);font-size:16px;color:var(--text);outline:none;">
+        </div>
+        <div>
+          <div style="font-family:var(--FM);font-size:11px;color:var(--text3);letter-spacing:2px;margin-bottom:7px;">ASSET PRICE (USDT)</div>
+          <input id="ci-price" type="number" value="79133" min="0.01" style="width:100%;background:var(--surface3);border:1px solid var(--border2);border-radius:8px;padding:12px 14px;font-family:var(--FM);font-size:16px;color:var(--text);outline:none;">
+        </div>
+        <div>
+          <div style="font-family:var(--FM);font-size:11px;color:var(--text3);letter-spacing:2px;margin-bottom:7px;">ENTRY PRICE (USDT)</div>
+          <input id="ci-entry" type="number" value="78664" min="0.01" style="width:100%;background:var(--surface3);border:1px solid var(--border2);border-radius:8px;padding:12px 14px;font-family:var(--FM);font-size:16px;color:var(--text);outline:none;">
+        </div>
+        <div>
+          <div style="font-family:var(--FM);font-size:11px;color:var(--text3);letter-spacing:2px;margin-bottom:7px;">STOP-LOSS PRICE (USDT)</div>
+          <input id="ci-sl" type="number" value="78432" min="0.01" style="width:100%;background:var(--surface3);border:1px solid var(--border2);border-radius:8px;padding:12px 14px;font-family:var(--FM);font-size:16px;color:var(--text);outline:none;">
+        </div>
+        <div>
+          <div style="font-family:var(--FM);font-size:11px;color:var(--text3);letter-spacing:2px;margin-bottom:7px;">YOUR LEVERAGE (for position sizing)</div>
+          <input id="ci-lev" type="number" value="10" min="1" max="125" style="width:100%;background:var(--surface3);border:1px solid var(--border2);border-radius:8px;padding:12px 14px;font-family:var(--FM);font-size:16px;color:var(--text);outline:none;">
+        </div>
+      </div>
+
+      <!-- RESULTS -->
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:8px;" id="calc-results">
+        <div style="background:var(--surface3);border:1px solid var(--border);border-radius:10px;padding:16px;">
+          <div style="font-family:var(--FM);font-size:10px;color:var(--text3);letter-spacing:2px;margin-bottom:8px;">RISK AMOUNT</div>
+          <div style="font-family:var(--FD);font-size:28px;font-weight:900;color:var(--accent);" id="co-risk">$100</div>
+          <div style="font-size:12px;color:var(--text3);margin-top:4px;font-weight:400;">Max dollars you lose if SL hits</div>
+        </div>
+        <div style="background:var(--surface3);border:1px solid var(--border);border-radius:10px;padding:16px;">
+          <div style="font-family:var(--FM);font-size:10px;color:var(--text3);letter-spacing:2px;margin-bottom:8px;">S/L DISTANCE</div>
+          <div style="font-family:var(--FD);font-size:28px;font-weight:900;color:var(--blue);" id="co-slpct">0.30%</div>
+          <div style="font-size:12px;color:var(--text3);margin-top:4px;font-weight:400;">% from entry to stop</div>
+        </div>
+        <div style="background:#1a0a00;border:2px solid var(--orange);border-radius:10px;padding:16px;">
+          <div style="font-family:var(--FM);font-size:10px;color:var(--orange);letter-spacing:2px;margin-bottom:8px;">MIN. LEVERAGE</div>
+          <div style="font-family:var(--FD);font-size:28px;font-weight:900;color:var(--orange);" id="co-minlev">4x</div>
+          <div style="font-size:12px;color:var(--text3);margin-top:4px;font-weight:400;">Lowest usable leverage for this trade</div>
+        </div>
+        <div style="background:var(--surface3);border:1px solid var(--border);border-radius:10px;padding:16px;">
+          <div style="font-family:var(--FM);font-size:10px;color:var(--text3);letter-spacing:2px;margin-bottom:8px;">MARGIN USED</div>
+          <div style="font-family:var(--FD);font-size:28px;font-weight:900;color:var(--text);" id="co-margin">$681</div>
+          <div style="font-size:12px;color:var(--text3);margin-top:4px;font-weight:400;">Collateral posted for the position</div>
+        </div>
+        <div style="background:var(--surface3);border:1px solid var(--border);border-radius:10px;padding:16px;">
+          <div style="font-family:var(--FM);font-size:10px;color:var(--text3);letter-spacing:2px;margin-bottom:8px;">POSITION SIZE</div>
+          <div style="font-family:var(--FD);font-size:28px;font-weight:900;color:var(--text);" id="co-possize">$34,065</div>
+          <div style="font-size:12px;color:var(--text3);margin-top:4px;font-weight:400;">Total notional value controlled</div>
+        </div>
+        <div style="background:var(--surface3);border:1px solid var(--border);border-radius:10px;padding:16px;" id="co-lev-status-card">
+          <div style="font-family:var(--FM);font-size:10px;letter-spacing:2px;margin-bottom:8px;" id="co-lev-status-lbl">LEVERAGE STATUS</div>
+          <div style="font-family:var(--FD);font-size:20px;font-weight:900;" id="co-lev-status">✓ OK</div>
+          <div style="font-size:12px;color:var(--text3);margin-top:4px;font-weight:400;" id="co-lev-status-msg">Your leverage is at or above minimum</div>
+        </div>
+      </div>
+
+      <div style="margin-top:18px;padding:14px 18px;background:var(--surface3);border-radius:8px;border-left:3px solid var(--text3);">
+        <div style="font-family:var(--FM);font-size:10px;color:var(--text3);letter-spacing:2px;margin-bottom:6px;">DISCLAIMER</div>
+        <div style="font-size:13px;color:var(--text3);font-weight:400;">Calculated position size does not account for associated market order fees. Actual margin requirements may vary by exchange.</div>
       </div>
     </div>
 
