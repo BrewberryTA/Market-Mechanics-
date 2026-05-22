@@ -246,6 +246,14 @@ body{background:var(--black);color:var(--text);font-family:var(--FB);font-size:1
   .nb{padding:9px 10px;font-size:12px;}
 }
 </style>
+<!-- Google Analytics 4 — G-SCCL0H6X4C -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SCCL0H6X4C"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-SCCL0H6X4C');
+</script>
 </head>
 <body>
 <!-- HAMBURGER (mobile only) -->
@@ -2410,6 +2418,13 @@ function G(n){
   cur=n;
   document.getElementById('pf').style.width=((n+1)/13*100)+'%';
   window.scrollTo(0,0);
+  // GA4 — track which module was visited
+  const moduleNames = {0:'Illusion',1:'Players',2:'Leverage',3:'FiveWays',4:'Funding',
+    5:'Basis',6:'Cascade',7:'Fractal',8:'WhoExtracts',9:'Altcoins',10:'SMC',
+    11:'RiskManagement',12:'Prologue'};
+  if(typeof gtag !== 'undefined'){
+    gtag('event','module_view',{module_id:n, module_name:moduleNames[n]||'unknown'});
+  }
   if(n===0&&!window.d0){bC0();window.d0=true;}
   if(n===3&&!window.d3){bD3();window.d3=true;}
   if(n===4&&!window.d4){bFund();window.d4=true;}
@@ -2612,6 +2627,7 @@ function calcUpdate(){
   const sl   = parseFloat(document.getElementById('ci-sl').value)    || 0;
   const lev  = parseFloat(document.getElementById('ci-lev').value)   || 1;
 
+  if(typeof gtag !== 'undefined') gtag('event','calculator_used',{calculator:'position_size'});
   if(!bal||!riskP||!price||!entry||!sl) return;
 
   const riskD   = bal * (riskP / 100);
@@ -2702,6 +2718,7 @@ function cgcUpdate(){
   const tpw   = parseFloat(document.getElementById('cgc-tpw').value)   || 3;
   const years = parseInt(document.getElementById('cgc-years').value)   || 3;
 
+  if(typeof gtag !== 'undefined') gtag('event','calculator_used',{calculator:'compound_growth',years:years,trades_per_week:tpw});
   const winRate  = wr / 100;
   const lossRate = 1 - winRate;
   const bwr      = 1 / (1 + rr) * 100;
