@@ -3,7 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Brewberry's Market Structure 101</title>
+<title>Brewberry's Market Structure 101 — How Bitcoin's Market Really Works</title>
+<meta name="description" content="A free, in-depth course on Bitcoin market structure — how the market actually works, who the participants are, and what drives price. Covers leverage, funding rates, liquidation cascades, algorithmic trading, SMC, and risk management.">
+<meta property="og:title" content="Brewberry's Market Structure 101">
+<meta property="og:description" content="A free course on how Bitcoin's market actually works. Leverage, funding rates, liquidation cascades, algorithmic trading, Smart Money Concepts, and risk management — built for traders who want to understand the system, not just the patterns.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://brewberryta.github.io/Market-Mechanics-/">
+<meta property="og:image" content="https://brewberryta.github.io/Market-Mechanics-/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Brewberry's Market Structure 101">
+<meta name="twitter:description" content="Free course — how Bitcoin's market actually works. Leverage, cascades, algorithms, SMC, risk management.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍺</text></svg>">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@400;500;600&display=swap');
@@ -41,8 +51,6 @@ body{background:var(--black);color:var(--text);font-family:var(--FB);font-size:1
 .h-brand{font-family:var(--FM);font-size:10px;color:var(--accent);letter-spacing:4px;text-transform:uppercase;margin-bottom:10px;}
 .h-title{font-family:var(--FD);font-size:52px;font-weight:900;color:var(--text);line-height:1.0;text-transform:uppercase;letter-spacing:-1px;margin-bottom:12px;max-width:760px;}
 .h-lead{font-size:19px;color:var(--text2);max-width:660px;line-height:1.65;margin-bottom:16px;}
-.cue{display:inline-flex;align-items:center;gap:8px;background:var(--surface2);border:1px solid var(--border2);border-radius:6px;padding:7px 12px;font-family:var(--FM);font-size:10px;color:var(--text3);letter-spacing:1px;}
-.cue::before{content:'▶';color:var(--accent);font-size:8px;}
 /* BODY */
 .bd{padding:32px 48px 52px;}
 .bt{font-size:17px;color:var(--text2);line-height:1.85;max-width:720px;margin-bottom:20px;font-weight:400;}
@@ -305,7 +313,6 @@ body{background:var(--black);color:var(--text);font-family:var(--FB);font-size:1
     <div class="h-brand">Brewberry's Market Structure 101 · Module 00</div>
     <div class="h-title">The Illusion</div>
     <div class="h-lead">Bitcoin was built to replace the existing financial system. By the numbers, it has become one of the most efficient dollar-generation machines that system has ever produced. Both of those things are true at the same time.</div>
-    <div class="cue">NARRATOR CUE — Open with the tension, not the mechanics. The student needs to feel the gap between what Bitcoin was and what it functionally is before the data lands.</div>
   </div>
   <div class="bd">
     <p class="bt">On October 31, 2008, Satoshi Nakamoto published a nine-page document describing a peer-to-peer electronic cash system. No bank. No clearinghouse. No trusted intermediary taking a cut. Value transferred directly between participants, settled without permission from any institution. It was a technical declaration of independence from the existing financial system — published 46 days after that system nearly collapsed.</p>
@@ -447,7 +454,6 @@ body{background:var(--black);color:var(--text);font-family:var(--FB);font-size:1
     <div class="h-brand">Brewberry's Market Structure 101 · Module 01</div>
     <div class="h-title">Meet the Players</div>
     <div class="h-lead">Before you understand the mechanics, you need to know who is at the table — and what weapons they're carrying that you aren't. Click each player to expand their full profile.</div>
-    <div class="cue">NARRATOR CUE — Walk through each player. Let viewers identify where they fit before the mechanics are revealed.</div>
   </div>
   <div class="bd">
     <p class="bt">Every market has participants. What makes crypto unique — and uniquely dangerous for retail — is how radically different the tools, capital, and information access are between player types. This is not a conspiracy. It is the natural result of a market where access to sophisticated instruments is stratified by capital and infrastructure.</p>
@@ -735,7 +741,6 @@ body{background:var(--black);color:var(--text);font-family:var(--FB);font-size:1
     <div class="h-brand">Brewberry's Market Structure 101 · Module 02</div>
     <div class="h-title">What is Leverage?</div>
     <div class="h-lead">The core mechanism driving almost everything in this market — including how the ETF system itself works.</div>
-    <div class="cue">NARRATOR CUE — Build from absolute zero. Simple money example first, then crypto mechanics, then ETF share creation.</div>
   </div>
   <div class="bd">
     <div class="sub">The Simple Version</div>
@@ -799,7 +804,6 @@ body{background:var(--black);color:var(--text);font-family:var(--FB);font-size:1
     <div class="h-brand">Brewberry's Market Structure 101 · Module 03</div>
     <div class="h-title">Five Ways to Bet on Bitcoin</div>
     <div class="h-lead">There are five main instruments in the Bitcoin market. Only one involves actually owning Bitcoin.</div>
-    <div class="cue">NARRATOR CUE — Walk the table slowly. The donut lands harder once they understand what each slice represents.</div>
   </div>
   <div class="bd">
     <table class="tbl">
@@ -843,7 +847,6 @@ body{background:var(--black);color:var(--text);font-family:var(--FB);font-size:1
     <div class="h-brand">Brewberry's Market Structure 101 · Module 04</div>
     <div class="h-title">The Funding Engine</div>
     <div class="h-lead">How perpetual swaps stay anchored to real Bitcoin — who pays, who collects, and why the pattern over time matters far more than any single reading.</div>
-    <div class="cue">NARRATOR CUE — Mechanism first. Then history. End on why pattern over time matters far more than any single reading.</div>
   </div>
   <div class="bd">
     <div class="sub">The Problem to Solve</div>
@@ -891,7 +894,6 @@ body{background:var(--black);color:var(--text);font-family:var(--FB);font-size:1
     <div class="h-brand">Brewberry's Market Structure 101 · Module 05</div>
     <div class="h-title">The Basis Trade</div>
     <div class="h-lead">The most important power asymmetry in the Bitcoin market — how institutions generate yield whether Bitcoin goes up, down, or sideways.</div>
-    <div class="cue">NARRATOR CUE — This is the first major reveal. The three-scenario proof is the moment that lands hardest. Pause there.</div>
   </div>
   <div class="bd">
     <div class="sub">The Setup</div>
@@ -938,7 +940,6 @@ body{background:var(--black);color:var(--text);font-family:var(--FB);font-size:1
     <div class="h-brand">Brewberry's Market Structure 101 · Module 06</div>
     <div class="h-title">The Liquidation Cascade</div>
     <div class="h-lead">The cascade is not a crash mechanism. It is a leverage-clearing mechanism — and it runs in both directions. The same engine that turns a 3% drop into a 20% crash turns a 3% bounce into a 20% short squeeze. Same participants. Same mechanics. Opposite direction.</div>
-    <div class="cue">NARRATOR CUE — Walk each step slowly. The waterfall visual should stay on screen while narrating. This is the section where everything clicks.</div>
   </div>
   <div class="bd">
     <div class="sub">The Three Conditions for a Cascade</div>
@@ -1001,7 +1002,6 @@ body{background:var(--black);color:var(--text);font-family:var(--FB);font-size:1
     <div class="h-brand">Brewberry's Market Structure 101 · Module 08</div>
     <div class="h-title">Who Extracts — and How</div>
     <div class="h-lead">Every dollar lost in a liquidation cascade went somewhere. This section maps exactly who benefits at each stage — and reveals that even big players compete against each other.</div>
-    <div class="cue">NARRATOR CUE — This is the "follow the money" section. Walk the flow diagram step by step. This is where the system becomes undeniable.</div>
   </div>
   <div class="bd">
     <p class="bt">The most important thing to understand about market structure is that it is not a conspiracy between all large players against retail. It is a <strong>competition</strong> — between hedge funds, market makers, basis traders, and institutions — where retail disproportionately absorbs losses in these events because they are operating with the least information, the least capital, and the most exposure to automated liquidation mechanics.</p>
@@ -1030,7 +1030,6 @@ body{background:var(--black);color:var(--text);font-family:var(--FB);font-size:1
     <div class="h-brand">Brewberry's Market Structure 101 · Module 09</div>
     <div class="h-title">Altcoin Markets</div>
     <div class="h-lead">Open ten different altcoin charts. The structures look identical — same sweeps, same order blocks, same cascades, same timing. This is not a coincidence. It is the mechanical consequence of one shared capital pool, one universal quote currency, and one risk barometer running across every market simultaneously.</div>
-    <div class="cue">NARRATOR CUE — The altcoin season myth section is important. Take your time dismantling the capital rotation narrative with the actual mechanics.</div>
   </div>
   <div class="bd">
     <div class="sub">Why Every Altcoin Chart Looks The Same</div>
@@ -1147,7 +1146,6 @@ body{background:var(--black);color:var(--text);font-family:var(--FB);font-size:1
     <div class="h-brand">Brewberry's Market Structure 101 · Module 10</div>
     <div class="h-title">SMC — The Fingerprint</div>
     <div class="h-lead">Everything you have just learned leaves a mark on the chart. Smart Money Concepts are not arbitrary rules — they are the visible fingerprint of the market mechanics you now understand.</div>
-    <div class="cue">NARRATOR CUE — This is the payoff. Deliver it with authority. Students who reached this section have earned it.</div>
   </div>
   <div class="bd">
     <p class="bt">Most traders learn SMC as a collection of patterns: "look for this shape, enter here, stop there." They follow the rules without understanding why those patterns exist. You are now in a different position. You understand the mechanics. Let's show you what they look like on a chart.</p>
@@ -1198,7 +1196,6 @@ body{background:var(--black);color:var(--text);font-family:var(--FB);font-size:1
     <div class="h-brand">Brewberry's Market Structure 101 · Module 11</div>
     <div class="h-title">Retail Risk Management</div>
     <div class="h-lead">Institutions generate yield whether they are right or wrong about direction. You cannot. This is a different game — and it requires a fundamentally different approach.</div>
-    <div class="cue">NARRATOR CUE — Close with truth, not despair. Retail has real structural advantages. Name them clearly.</div>
   </div>
   <div class="bd">
     <p class="bt">After everything you have learned, the honest conclusion is uncomfortable: <strong>the Bitcoin derivatives market was not designed with retail in mind.</strong> It was built by and for sophisticated institutional participants with tools, capital, and infrastructure that retail cannot replicate.</p>
@@ -1623,7 +1620,6 @@ body{background:var(--black);color:var(--text);font-family:var(--FB);font-size:1
     <div class="h-brand">Brewberry's Market Structure 101 · Module 07</div>
     <div class="h-title">The Fractal Nature</div>
     <div class="h-lead">Everything you have learned about the daily chart is also true on the 4-hour, the 15-minute, and the 1-minute. This is not a coincidence. It is a mechanical consequence — and understanding why changes how you read every timeframe.</div>
-    <div class="cue">NARRATOR CUE — This is the synthesis. The student now has every piece. Show them the architecture that connects them all.</div>
   </div>
   <div class="bd">
     <p class="bt">Most trading education treats timeframes as separate topics. "Here is how to trade the daily chart. Here is how to trade the 15-minute." What they fail to explain is why the patterns look the same regardless of timeframe — and that reason is not mystical. It is mechanical.</p>
@@ -1707,7 +1703,6 @@ body{background:var(--black);color:var(--text);font-family:var(--FB);font-size:1
     <div class="h-brand">Brewberry's Market Structure 101 · Prologue</div>
     <div class="h-title">How We Got Here</div>
     <div class="h-lead">Bitcoin was built to escape the existing financial system. It couldn't be stopped. So the system did what it always does — it applied the same playbook it uses on every asset that threatens it. And Bitcoin responded exactly like every other asset has.</div>
-    <div class="cue">NARRATOR CUE — This is the frame for everything. Not conspiracy. Not accident. A self-executing playbook that doesn't require intent to produce control.</div>
   </div>
   <div class="bd">
     <p class="bt">To understand why Bitcoin's market looks the way it does today — why 80% of volume is derivatives, why price is set in paper markets, why the patterns on your chart look the way they do — you need to understand one thing: <strong>this has all happened before.</strong></p>
