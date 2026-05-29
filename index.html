@@ -2636,6 +2636,7 @@ const players=[
   loses:"Basis compresses as the trade gets overcrowded. When too many funds pile in, the $1,000 spread narrows to $200. The mass unwind creates coordinated multi-market selling that can cascade into spot."},
   {name:"Market Makers",role:"Liquidity Providers",icon:"🕸️",col:"#3b82f6",power:"Capital: Variable · Co-located servers · Full orderbook visibility",
   colocated:true,
+  mmdeep:true,
   strat:"Quote both sides of spot and perp orderbooks continuously, earning the bid-ask spread on every trade. Delta-hedge means: for every position they take on one side of the book, they immediately offset it in a correlated instrument — so their net directional exposure stays near zero. They profit from the spread, not the direction. They know exactly where liquidation clusters sit because exchanges publish aggregate data in real time at their infrastructure level — giving them microsecond advantage. When a cascade begins, they pull their bids (buy orders) — making the order book thin — which amplifies each forced sell's price impact. They re-enter at the bottom with wider spreads.",
   wins:"Collect spread continuously. More volatility = wider spreads = more revenue. Cascade events are profitable twice: first when they pull bids to amplify the move, second when they re-enter at the bottom.",
   loses:"Inventory risk if caught with a large directional position during a gap move. Cannot hedge perfectly in every scenario."},
@@ -2665,6 +2666,152 @@ function bPlayers(){
       <div class="p-power">${p.power}</div>
       <div style="font-size:13px;color:var(--text3);">Click to expand full profile ▼</div>
       <div class="p-det">
+        ${p.mmdeep?`
+        <div style="background:#050d1a;border:2px solid #3b82f6;border-radius:12px;padding:24px;margin:20px 0;">
+          <div style="font-family:var(--FM);font-size:10px;color:#3b82f6;letter-spacing:3px;text-transform:uppercase;margin-bottom:20px;">🔬 Why Does The Market Need To Be Made? — The Full Breakdown</div>
+
+          <!-- THE COORDINATION PROBLEM -->
+          <div style="margin-bottom:24px;">
+            <div style="font-family:var(--FD);font-size:17px;font-weight:800;color:#93c5fd;text-transform:uppercase;margin-bottom:10px;">The Problem They Solve</div>
+            <div style="font-size:14px;color:var(--text2);line-height:1.75;font-weight:400;">When you want to buy Bitcoin right now, you need someone willing to sell Bitcoin right now at the same price at the same moment. Without a market maker, you'd post a buy order and wait — potentially hours or never — for someone with the exact opposite need to appear simultaneously. This is called the <strong style="color:var(--text);">double coincidence of wants</strong> problem. Market makers eliminate it by being permanently available on both sides, 24 hours a day, every day.</div>
+          </div>
+
+          <!-- SPREAD VISUAL -->
+          <div style="margin-bottom:24px;">
+            <div style="font-family:var(--FD);font-size:17px;font-weight:800;color:#93c5fd;text-transform:uppercase;margin-bottom:14px;">How They Make Money — The Spread</div>
+            <svg viewBox="0 0 700 160" style="width:100%;border-radius:8px;background:#0a1525;">
+              <!-- Background -->
+              <rect width="700" height="160" fill="#0a1525" rx="6"/>
+              <!-- Labels -->
+              <text x="350" y="22" fill="#555" font-size="11" text-anchor="middle" font-family="monospace">ORDER BOOK — MARKET MAKER QUOTING BOTH SIDES</text>
+              <!-- BID side -->
+              <rect x="20" y="35" width="280" height="110" fill="#021a08" rx="6" stroke="#166534" stroke-width="1"/>
+              <text x="160" y="55" fill="#22c55e" font-size="11" font-weight="bold" text-anchor="middle" font-family="monospace">BID SIDE (Market Maker BUYS)</text>
+              <rect x="35" y="64" width="250" height="22" fill="#166534" rx="3"/>
+              <text x="160" y="80" fill="#fff" font-size="13" font-weight="bold" text-anchor="middle" font-family="monospace">$94,999.50 — 2.0 BTC</text>
+              <rect x="35" y="91" width="210" height="18" fill="#14532d" rx="3"/>
+              <text x="140" y="104" fill="#86efac" font-size="11" text-anchor="middle" font-family="monospace">$94,998.00 — 1.5 BTC</text>
+              <rect x="35" y="113" width="170" height="16" fill="#052e16" rx="3"/>
+              <text x="120" y="125" fill="#4ade80" font-size="10" text-anchor="middle" font-family="monospace">$94,996.00 — 3.0 BTC</text>
+              <text x="160" y="148" fill="#22c55e" font-size="10" text-anchor="middle" font-family="monospace">Market maker will BUY at these prices</text>
+              <!-- ASK side -->
+              <rect x="400" y="35" width="280" height="110" fill="#1a0505" rx="6" stroke="#991b1b" stroke-width="1"/>
+              <text x="540" y="55" fill="#ef4444" font-size="11" font-weight="bold" text-anchor="middle" font-family="monospace">ASK SIDE (Market Maker SELLS)</text>
+              <rect x="415" y="64" width="250" height="22" fill="#991b1b" rx="3"/>
+              <text x="540" y="80" fill="#fff" font-size="13" font-weight="bold" text-anchor="middle" font-family="monospace">$95,000.50 — 2.0 BTC</text>
+              <rect x="415" y="91" width="210" height="18" fill="#7f1d1d" rx="3"/>
+              <text x="520" y="104" fill="#fca5a5" font-size="11" text-anchor="middle" font-family="monospace">$95,002.00 — 1.5 BTC</text>
+              <rect x="415" y="113" width="170" height="16" fill="#450a0a" rx="3"/>
+              <text x="500" y="125" fill="#f87171" font-size="10" text-anchor="middle" font-family="monospace">$95,004.00 — 3.0 BTC</text>
+              <text x="540" y="148" fill="#ef4444" font-size="10" text-anchor="middle" font-family="monospace">Market maker will SELL at these prices</text>
+              <!-- Spread label -->
+              <line x1="300" y1="75" x2="400" y2="75" stroke="#fbbf24" stroke-width="2" stroke-dasharray="4,3"/>
+              <text x="350" y="68" fill="#fbbf24" font-size="10" font-weight="bold" text-anchor="middle" font-family="monospace">SPREAD = $1.00</text>
+              <text x="350" y="95" fill="#fbbf24" font-size="9" text-anchor="middle" font-family="monospace">Collected on</text>
+              <text x="350" y="107" fill="#fbbf24" font-size="9" text-anchor="middle" font-family="monospace">every trade</text>
+            </svg>
+            <div style="font-size:13px;color:var(--text3);margin-top:10px;font-weight:400;">The market maker posts both sides simultaneously. You buy at $95,000.50. Someone else sells at $94,999.50. The market maker collects the $1.00 spread on both sides of that transaction. On a market doing millions of contracts a day, that $1.00 becomes tens of millions in daily spread income — regardless of whether Bitcoin goes up or down.</div>
+          </div>
+
+          <!-- INVENTORY RISK -->
+          <div style="margin-bottom:24px;">
+            <div style="font-family:var(--FD);font-size:17px;font-weight:800;color:#93c5fd;text-transform:uppercase;margin-bottom:10px;">The Risk They Take — Inventory</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+              <div style="background:#0a0500;border:1px solid #2a1500;border-radius:8px;padding:14px;">
+                <div style="font-family:var(--FM);font-size:10px;color:var(--orange);letter-spacing:2px;margin-bottom:8px;">THE PROBLEM</div>
+                <div style="font-size:13px;color:var(--text2);line-height:1.65;font-weight:400;">Every time the market maker buys from you (fills your sell order), they are now holding Bitcoin that might keep falling. Every time they sell to you (fill your buy order), they're short Bitcoin that might keep rising. They accumulate <strong style="color:var(--text);">inventory risk</strong> — a directional position they didn't want and need to manage.</div>
+              </div>
+              <div style="background:#021a08;border:1px solid #14532d;border-radius:8px;padding:14px;">
+                <div style="font-family:var(--FM);font-size:10px;color:var(--green);letter-spacing:2px;margin-bottom:8px;">THE SOLUTION</div>
+                <div style="font-size:13px;color:var(--text2);line-height:1.65;font-weight:400;">Delta hedging. For every BTC they accumulate on the bid side, they short an equivalent amount on the perp or futures market. Net directional exposure = near zero. They don't care if Bitcoin goes up or down — they're collecting the spread on both sides while staying flat on direction.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CASCADE BEHAVIOUR -->
+          <div>
+            <div style="font-family:var(--FD);font-size:17px;font-weight:800;color:#93c5fd;text-transform:uppercase;margin-bottom:10px;">Why They Pull Bids During Cascades</div>
+            <div style="font-size:14px;color:var(--text2);line-height:1.75;font-weight:400;margin-bottom:14px;">This is the part that directly affects every trader. When a cascade begins, market makers don't step in and buy — they disappear. Here's why, and why it's rational:</div>
+            <div style="display:flex;flex-direction:column;gap:0;">
+              <div style="display:flex;align-items:center;gap:14px;padding:12px 0;border-bottom:1px solid #1a2a3a;">
+                <div style="width:32px;height:32px;border-radius:50%;background:#3b82f6;display:flex;align-items:center;justify-content:center;font-family:var(--FD);font-size:14px;font-weight:900;color:#fff;flex-shrink:0;">1</div>
+                <div style="font-size:13px;color:var(--text2);font-weight:400;">Their co-located servers detect the incoming liquidation cascade before it hits. They see the cluster of forced orders about to arrive at market price.</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:14px;padding:12px 0;border-bottom:1px solid #1a2a3a;">
+                <div style="width:32px;height:32px;border-radius:50%;background:#3b82f6;display:flex;align-items:center;justify-content:center;font-family:var(--FD);font-size:14px;font-weight:900;color:#fff;flex-shrink:0;">2</div>
+                <div style="font-size:13px;color:var(--text2);font-weight:400;">If they keep their bids posted, they'll absorb millions of BTC in forced sells — accumulating enormous inventory risk at a price that's about to drop further. Their spread income doesn't compensate for that directional loss.</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:14px;padding:12px 0;border-bottom:1px solid #1a2a3a;">
+                <div style="width:32px;height:32px;border-radius:50%;background:#3b82f6;display:flex;align-items:center;justify-content:center;font-family:var(--FD);font-size:14px;font-weight:900;color:#fff;flex-shrink:0;">3</div>
+                <div style="font-size:13px;color:var(--text2);font-weight:400;">So they cancel their bids. The book empties. Now each forced sell has almost no buyers to hit — so each sell moves the price much further down than it would in a normal market. This is the <strong style="color:var(--text);">thin book amplification</strong> that turns 3% into 20%.</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:14px;padding:12px 0;">
+                <div style="width:32px;height:32px;border-radius:50%;background:#22c55e;display:flex;align-items:center;justify-content:center;font-family:var(--FD);font-size:14px;font-weight:900;color:#fff;flex-shrink:0;">4</div>
+                <div style="font-size:13px;color:var(--text2);font-weight:400;">Once the cascade exhausts itself, market makers re-enter — now with <strong style="color:var(--text);">wider spreads</strong> because volatility is high, meaning they collect more per trade. They buy the bottom they helped create, with better economics than before the cascade started.</div>
+              </div>
+            </div>
+            <div style="margin-top:14px;background:#0a0a00;border-left:3px solid var(--accent);padding:12px 16px;border-radius:0 6px 6px 0;">
+              <div style="font-size:13px;color:var(--text2);font-weight:400;line-height:1.65;">This is not manipulation — it is rational self-preservation under extreme inventory risk. The side effect is that it amplifies every cascade, every time, mechanically and predictably. Understanding this is why Module 11 emphasises position sizing so heavily — the cascade amplification is structural, not random.</div>
+            </div>
+          </div>
+
+          <!-- INCOME STACK -->
+          <div style="margin-top:24px;padding-top:24px;border-top:1px solid #1a2a3a;">
+            <div style="font-family:var(--FD);font-size:17px;font-weight:800;color:#93c5fd;text-transform:uppercase;margin-bottom:14px;">Beyond The Spread — The Full Income Stack</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
+              <div style="background:#0a1525;border:1px solid #1a2a3a;border-radius:8px;padding:14px;">
+                <div style="font-family:var(--FM);font-size:10px;color:#3b82f6;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;">① Spread Income</div>
+                <div style="font-size:13px;color:var(--text2);line-height:1.65;font-weight:400;">The primary and most consistent source. Collected on every trade, in both directions, regardless of whether price goes up or down. Scales with volume and widens during volatility — the worst moments for retail are the most profitable per-trade for market makers.</div>
+              </div>
+              <div style="background:#0a1525;border:1px solid #1a2a3a;border-radius:8px;padding:14px;">
+                <div style="font-family:var(--FM);font-size:10px;color:#3b82f6;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;">② Exchange Rebates</div>
+                <div style="font-size:13px;color:var(--text2);line-height:1.65;font-weight:400;">Exchanges pay market makers to post orders — because without them the book is empty and nobody can trade. Rebates are reserved for firms trading $100M+ monthly. The exchange needs them more than they need the exchange, and they negotiate accordingly.</div>
+              </div>
+              <div style="background:#0a1525;border:1px solid #1a2a3a;border-radius:8px;padding:14px;">
+                <div style="font-family:var(--FM);font-size:10px;color:#3b82f6;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;">③ Cross-Venue Arbitrage</div>
+                <div style="font-size:13px;color:var(--text2);line-height:1.65;font-weight:400;">When Bitcoin trades at different prices on Binance vs OKX vs Bybit, the market maker captures that gap before it closes — in milliseconds. This is why price synchronises instantly across all exchanges. The arb profit is the income; the synchronisation is the side effect.</div>
+              </div>
+              <div style="background:#0a1525;border:1px solid #1a2a3a;border-radius:8px;padding:14px;">
+                <div style="font-family:var(--FM);font-size:10px;color:#3b82f6;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;">④ Token Project Contracts</div>
+                <div style="font-size:13px;color:var(--text2);line-height:1.65;font-weight:400;">When a new token lists, it needs someone to make the market — no natural buyers and sellers exist yet. Projects pay for this service, often combining cash fees with token allocations. The market maker receives tokens as working inventory — which is where incentive alignment starts to matter.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- THE SPECTRUM — MISALIGNED INCENTIVES -->
+          <div style="margin-top:24px;padding-top:24px;border-top:1px solid #1a2a3a;">
+            <div style="font-family:var(--FD);font-size:17px;font-weight:800;color:#93c5fd;text-transform:uppercase;margin-bottom:6px;">The Operator Spectrum — Same Title, Different Incentives</div>
+            <div style="font-size:14px;color:var(--text2);line-height:1.7;font-weight:400;margin-bottom:18px;">Not every market maker is the same. The same structural role — providing liquidity — can be filled by operators with very different incentive structures depending on who hired them, what they were paid in, and what market they operate in. The system produces these misaligned incentives as a structural byproduct, regardless of any individual operator's intent.</div>
+
+            <!-- TIER 1 -->
+            <div style="background:#021a08;border:1px solid #14532d;border-radius:10px;padding:18px;margin-bottom:10px;">
+              <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
+                <div style="background:var(--green);color:#000;font-family:var(--FM);font-size:10px;font-weight:700;letter-spacing:2px;padding:4px 10px;border-radius:4px;">PROFESSIONAL TIER</div>
+                <div style="font-family:var(--FD);font-size:15px;font-weight:800;color:var(--green);">Major Pairs on Major Exchanges</div>
+              </div>
+              <div style="font-size:13px;color:var(--text2);line-height:1.7;font-weight:400;">BTC, ETH, SOL on Binance, OKX, Bybit. Market maker earns spread and rebates. Their working inventory is USDT and the asset itself — not project tokens. Their income comes from volume and spread, not from the asset appreciating. <strong style="color:var(--text);">Their incentive is a liquid, efficient market — because that produces maximum spread income.</strong> Tight alignment with what a functional market needs.</div>
+              <div style="font-size:12px;color:var(--text3);margin-top:8px;font-weight:400;">Examples: Wintermute ($5B+ daily volume), Cumberland DRW, GSR Markets, Jump Trading (legacy positions). Wintermute alone handled 11% of Robinhood's transaction revenue as of early 2025.</div>
+            </div>
+
+            <!-- TIER 2 -->
+            <div style="background:#1a1000;border:1px solid #3a2500;border-radius:10px;padding:18px;margin-bottom:10px;">
+              <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
+                <div style="background:var(--orange);color:#000;font-family:var(--FM);font-size:10px;font-weight:700;letter-spacing:2px;padding:4px 10px;border-radius:4px;">GREY ZONE</div>
+                <div style="font-family:var(--FD);font-size:15px;font-weight:800;color:var(--orange);">Token Project Market Making</div>
+              </div>
+              <div style="font-size:13px;color:var(--text2);line-height:1.7;font-weight:400;">A new token hires a market maker, paying partly in cash and partly in token allocation as working inventory. The market maker now holds a large position in a token whose price directly affects their own P&L. Their incentive to maintain a liquid market is now competing with their incentive to manage their token position.<br><br>
+              This is not inherently corrupt — many legitimate firms operate in this space with full disclosure. But the structure creates misaligned incentives that a liquid, deep market like BTC/ETH simply doesn't produce. The market maker's interest in their inventory can diverge from the token holder's interest in fair price discovery. <strong style="color:var(--text);">The vulnerability exists by design, regardless of whether any individual operator exploits it.</strong></div>
+              <div style="font-size:12px;color:var(--text3);margin-top:8px;font-weight:400;">The practical signal: the thinner the market and the newer the token, the higher the probability that the market maker's interests are not fully aligned with yours as a trader.</div>
+            </div>
+
+            <!-- THE STRUCTURAL POINT -->
+            <div style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:16px 20px;border-left:4px solid #3b82f6;">
+              <div style="font-family:var(--FM);font-size:10px;color:#3b82f6;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;">The Structural Point</div>
+              <div style="font-size:14px;color:var(--text2);line-height:1.75;font-weight:400;">Market making is a role the market genuinely needs. The spread income model — at its most basic — aligns the market maker's income with market health. The vulnerabilities emerge when that simple alignment gets complicated by token allocations, project relationships, and thin books where a single operator has outsized influence over price.<br><br>
+              <strong style="color:var(--text);">The takeaway is not that market makers are adversaries. It is that the market they operate in is deep and professional for BTC and ETH — and substantially less so for long-tail tokens.</strong> That distinction should directly inform which markets you trade and how you interpret price action in each.</div>
+            </div>
+          </div>
+        </div>`:''}
         ${p.colocated?`<div style="background:#0a1220;border:1px solid #1e3a5f;border-left:4px solid #3b82f6;border-radius:0 8px 8px 0;padding:16px 20px;margin-bottom:18px;">
           <div style="font-family:var(--FM);font-size:10px;color:#3b82f6;letter-spacing:3px;text-transform:uppercase;margin-bottom:8px;">⚡ WHAT IS CO-LOCATION — AND WHY DOES IT MATTER?</div>
           <div style="font-size:15px;color:var(--text2);line-height:1.8;font-weight:400;">Co-location means the market maker's trading servers are physically housed <em>inside</em> the same data center as the exchange's matching engine — sometimes in the same rack. The result: their orders reach the exchange in <strong style="color:var(--text);">under 1 millisecond</strong>, while a retail trader routing through a web browser takes 50–300ms or more.<br><br>
