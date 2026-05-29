@@ -1596,6 +1596,124 @@ body{background:var(--black);color:var(--text);font-family:var(--FB);font-size:1
       </div>
     </div>
 
+    <!-- MULTI-TP POSITION TOOL -->
+    <div class="sub">Multi-Take-Profit Position Builder</div>
+    <p class="bt">Most professional traders don't exit a full position at one level. Partial exits lock in profit, reduce emotional pressure, and let a portion of the trade run to a larger target. This tool lets you model up to three take-profit levels, see the blended R:R and expectancy, and feed that directly into the compound calculator above.</p>
+
+    <div style="background:var(--surface2);border:1px solid var(--border);border-radius:14px;padding:28px;margin:18px 0;max-width:1000px;" id="mtp-wrap">
+      <div style="font-family:var(--FM);font-size:10px;color:var(--text3);letter-spacing:3px;text-transform:uppercase;margin-bottom:22px;">MULTI-TP POSITION BUILDER</div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:24px;">
+
+        <!-- LEFT: PRICE INPUTS -->
+        <div>
+          <div style="font-family:var(--FM);font-size:10px;color:var(--text3);letter-spacing:3px;text-transform:uppercase;margin-bottom:14px;">POSITION LEVELS (USDT)</div>
+
+          <!-- Direction toggle -->
+          <div style="display:flex;gap:8px;margin-bottom:16px;">
+            <button id="mtp-long-btn" onclick="mtpSetDir('long')" style="flex:1;padding:10px;background:var(--green);color:#000;font-family:var(--FD);font-size:15px;font-weight:800;border:none;border-radius:6px;cursor:pointer;">LONG ▲</button>
+            <button id="mtp-short-btn" onclick="mtpSetDir('short')" style="flex:1;padding:10px;background:var(--surface3);color:var(--text3);font-family:var(--FD);font-size:15px;font-weight:700;border:1px solid var(--border);border-radius:6px;cursor:pointer;">SHORT ▼</button>
+          </div>
+
+          <!-- Price inputs -->
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <div>
+              <div style="font-family:var(--FM);font-size:10px;color:var(--text3);letter-spacing:1px;margin-bottom:5px;">ENTRY PRICE</div>
+              <input id="mtp-entry" type="number" value="95000" style="width:100%;background:var(--surface3);border:2px solid #fbbf24;border-radius:8px;padding:10px 12px;font-family:var(--FM);font-size:18px;color:#fbbf24;outline:none;">
+            </div>
+            <div>
+              <div style="font-family:var(--FM);font-size:10px;color:var(--red);letter-spacing:1px;margin-bottom:5px;">STOP LOSS</div>
+              <input id="mtp-sl" type="number" value="94000" style="width:100%;background:var(--surface3);border:2px solid var(--red);border-radius:8px;padding:10px 12px;font-family:var(--FM);font-size:18px;color:var(--red);outline:none;">
+            </div>
+
+            <!-- TP rows -->
+            <div id="mtp-tp1-row">
+              <div style="display:flex;align-items:center;gap:6px;margin-bottom:5px;">
+                <div style="font-family:var(--FM);font-size:10px;color:var(--green);letter-spacing:1px;">TP1 PRICE</div>
+                <input id="mtp-tp1-pct" type="number" value="50" min="10" max="100" step="5" style="width:60px;background:var(--surface3);border:1px solid var(--border2);border-radius:4px;padding:3px 6px;font-family:var(--FM);font-size:11px;color:var(--text);outline:none;">
+                <div style="font-family:var(--FM);font-size:10px;color:var(--text3);">% of position</div>
+                <label style="display:flex;align-items:center;gap:4px;margin-left:auto;font-family:var(--FM);font-size:10px;color:var(--text3);">
+                  <input type="checkbox" id="mtp-be" checked style="accent-color:var(--green);"> Move SL to BE after TP1
+                </label>
+              </div>
+              <input id="mtp-tp1" type="number" value="96000" style="width:100%;background:var(--surface3);border:2px solid var(--green);border-radius:8px;padding:10px 12px;font-family:var(--FM);font-size:18px;color:var(--green);outline:none;">
+            </div>
+
+            <div id="mtp-tp2-row">
+              <div style="display:flex;align-items:center;gap:6px;margin-bottom:5px;">
+                <div style="font-family:var(--FM);font-size:10px;color:#22d3ee;letter-spacing:1px;">TP2 PRICE</div>
+                <input id="mtp-tp2-pct" type="number" value="30" min="0" max="90" step="5" style="width:60px;background:var(--surface3);border:1px solid var(--border2);border-radius:4px;padding:3px 6px;font-family:var(--FM);font-size:11px;color:var(--text);outline:none;">
+                <div style="font-family:var(--FM);font-size:10px;color:var(--text3);">% of position</div>
+                <div id="mtp-tp2-remaining" style="margin-left:auto;font-family:var(--FM);font-size:10px;color:var(--text3);">20% runs to TP3</div>
+              </div>
+              <input id="mtp-tp2" type="number" value="97000" style="width:100%;background:var(--surface3);border:2px solid #22d3ee;border-radius:8px;padding:10px 12px;font-family:var(--FM);font-size:18px;color:#22d3ee;outline:none;">
+            </div>
+
+            <div id="mtp-tp3-row">
+              <div style="display:flex;align-items:center;gap:6px;margin-bottom:5px;">
+                <div style="font-family:var(--FM);font-size:10px;color:#a855f7;letter-spacing:1px;">TP3 PRICE (RUNNER)</div>
+                <div id="mtp-tp3-pct-label" style="font-family:var(--FM);font-size:10px;color:var(--text3);margin-left:auto;">20% of position</div>
+              </div>
+              <input id="mtp-tp3" type="number" value="98500" style="width:100%;background:var(--surface3);border:2px solid #a855f7;border-radius:8px;padding:10px 12px;font-family:var(--FM);font-size:18px;color:#a855f7;outline:none;">
+            </div>
+
+          </div>
+        </div>
+
+        <!-- RIGHT: POSITION DIAGRAM SVG -->
+        <div>
+          <div style="font-family:var(--FM);font-size:10px;color:var(--text3);letter-spacing:3px;text-transform:uppercase;margin-bottom:14px;">POSITION DIAGRAM</div>
+          <canvas id="mtp-canvas" style="width:100%;height:340px;border-radius:10px;background:var(--surface3);border:1px solid var(--border);"></canvas>
+        </div>
+      </div>
+
+      <!-- METRICS ROW -->
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:20px;" id="mtp-metrics">
+        <div style="background:var(--surface3);border:1px solid var(--border);border-radius:8px;padding:12px;text-align:center;">
+          <div style="font-family:var(--FM);font-size:9px;color:var(--text3);letter-spacing:1px;margin-bottom:5px;">RISK AMOUNT</div>
+          <div style="font-family:var(--FD);font-size:22px;font-weight:900;color:var(--red);" id="mtp-risk-amt">—</div>
+          <div style="font-size:10px;color:var(--text3);margin-top:2px;">at 1% risk</div>
+        </div>
+        <div style="background:var(--surface3);border:1px solid var(--border);border-radius:8px;padding:12px;text-align:center;">
+          <div style="font-family:var(--FM);font-size:9px;color:var(--text3);letter-spacing:1px;margin-bottom:5px;">BLENDED R:R</div>
+          <div style="font-family:var(--FD);font-size:22px;font-weight:900;color:var(--accent);" id="mtp-blended-rr">—</div>
+          <div style="font-size:10px;color:var(--text3);margin-top:2px;">weighted average</div>
+        </div>
+        <div style="background:var(--surface3);border:1px solid var(--border);border-radius:8px;padding:12px;text-align:center;">
+          <div style="font-family:var(--FM);font-size:9px;color:var(--text3);letter-spacing:1px;margin-bottom:5px;">BREAKEVEN WIN%</div>
+          <div style="font-family:var(--FD);font-size:22px;font-weight:900;color:var(--blue);" id="mtp-be-wr">—</div>
+          <div style="font-size:10px;color:var(--text3);margin-top:2px;">to break even</div>
+        </div>
+        <div style="background:#021a08;border:1px solid var(--green);border-radius:8px;padding:12px;text-align:center;">
+          <div style="font-family:var(--FM);font-size:9px;color:var(--green);letter-spacing:1px;margin-bottom:5px;">FULL WIN VALUE</div>
+          <div style="font-family:var(--FD);font-size:22px;font-weight:900;color:var(--green);" id="mtp-full-win">—</div>
+          <div style="font-size:10px;color:var(--text3);margin-top:2px;">all TPs hit</div>
+        </div>
+        <div style="background:var(--surface3);border:2px solid var(--accent);border-radius:8px;padding:12px;text-align:center;" id="mtp-sync-card">
+          <div style="font-family:var(--FM);font-size:9px;color:var(--accent);letter-spacing:1px;margin-bottom:5px;">→ COMPOUND CALC</div>
+          <div style="font-family:var(--FD);font-size:18px;font-weight:900;color:var(--accent);" id="mtp-sync-rr">—</div>
+          <button onclick="mtpSyncToCalc()" style="margin-top:6px;width:100%;background:var(--accent);color:#000;font-family:var(--FM);font-size:10px;font-weight:700;padding:5px;border:none;border-radius:4px;cursor:pointer;">USE THIS R:R ↑</button>
+        </div>
+      </div>
+
+      <!-- TP BREAKDOWN TABLE -->
+      <div style="border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:16px;">
+        <div style="display:grid;grid-template-columns:80px 1fr 1fr 1fr 1fr 1fr;background:var(--surface3);padding:10px 14px;border-bottom:1px solid var(--border);">
+          <div style="font-family:var(--FM);font-size:10px;color:var(--text3);letter-spacing:1px;">LEVEL</div>
+          <div style="font-family:var(--FM);font-size:10px;color:var(--text3);letter-spacing:1px;">PRICE</div>
+          <div style="font-family:var(--FM);font-size:10px;color:var(--text3);letter-spacing:1px;">% POSITION</div>
+          <div style="font-family:var(--FM);font-size:10px;color:var(--text3);letter-spacing:1px;">MOVE</div>
+          <div style="font-family:var(--FM);font-size:10px;color:var(--text3);letter-spacing:1px;">R MULTIPLE</div>
+          <div style="font-family:var(--FM);font-size:10px;color:var(--text3);letter-spacing:1px;">P&amp;L ($)</div>
+        </div>
+        <div id="mtp-table-body"></div>
+      </div>
+
+      <div style="padding:12px 16px;background:var(--surface3);border-radius:8px;border-left:3px solid var(--accent);">
+        <div style="font-size:12px;color:var(--text3);font-weight:400;line-height:1.6;">The blended R:R is the weighted average across all take-profit levels based on the % of position at each. Click "USE THIS R:R ↑" to push the blended R:R into the compound calculator — the equity curve and year-by-year projections will immediately reflect your actual exit strategy rather than a single-exit assumption.</div>
+      </div>
+    </div>
+
     <!-- RULE 4 — FULL WIDTH HERO CARD -->
     <div style="background:linear-gradient(135deg,#021a08 0%,#031f0a 50%,#042210 100%);border:1px solid #1a4a2a;border-left:6px solid var(--green);border-radius:0 16px 16px 0;padding:36px 40px;margin:24px 0;position:relative;overflow:hidden;">
       <div style="position:absolute;right:-10px;top:-20px;font-family:var(--FD);font-size:200px;font-weight:900;color:#0a3018;line-height:1;pointer-events:none;user-select:none;">4</div>
@@ -3249,6 +3367,174 @@ function ftUpdate(){
   if(el) el.addEventListener('input', ftUpdate);
 });
 ftUpdate();
+
+// ── MULTI-TP POSITION BUILDER ────────────────────────────────────────────────
+let mtpDirection = 'long';
+
+function mtpSetDir(dir){
+  mtpDirection = dir;
+  const lb = document.getElementById('mtp-long-btn');
+  const sb = document.getElementById('mtp-short-btn');
+  if(lb && sb){
+    if(dir === 'long'){
+      lb.style.background='var(--green)'; lb.style.color='#000';
+      sb.style.background='var(--surface3)'; sb.style.color='var(--text3)';
+      document.getElementById('mtp-entry').value=95000;
+      document.getElementById('mtp-sl').value=94000;
+      document.getElementById('mtp-tp1').value=96000;
+      document.getElementById('mtp-tp2').value=97000;
+      document.getElementById('mtp-tp3').value=98500;
+    } else {
+      sb.style.background='var(--red)'; sb.style.color='#fff';
+      lb.style.background='var(--surface3)'; lb.style.color='var(--text3)';
+      document.getElementById('mtp-entry').value=95000;
+      document.getElementById('mtp-sl').value=96000;
+      document.getElementById('mtp-tp1').value=94000;
+      document.getElementById('mtp-tp2').value=93000;
+      document.getElementById('mtp-tp3').value=91500;
+    }
+  }
+  mtpUpdate();
+}
+
+function mtpSyncToCalc(){
+  const el = document.getElementById('mtp-blended-rr');
+  if(!el) return;
+  const val = parseFloat(el.textContent.replace('1:',''));
+  if(!isNaN(val)){
+    const rrEl = document.getElementById('cgc-rr');
+    if(rrEl){ rrEl.value = val.toFixed(2); cgcUpdate(); }
+    const card = document.getElementById('mtp-sync-card');
+    if(card){ card.style.borderColor='var(--green)'; setTimeout(()=>card.style.borderColor='var(--accent)',800); }
+  }
+}
+
+function mtpUpdate(){
+  const entry  = parseFloat(document.getElementById('mtp-entry').value)||95000;
+  const sl     = parseFloat(document.getElementById('mtp-sl').value)||94000;
+  const tp1p   = parseFloat(document.getElementById('mtp-tp1').value)||96000;
+  const tp2p   = parseFloat(document.getElementById('mtp-tp2').value)||97000;
+  const tp3p   = parseFloat(document.getElementById('mtp-tp3').value)||98500;
+  const tp1pct = parseFloat(document.getElementById('mtp-tp1-pct').value)||50;
+  const tp2pct = parseFloat(document.getElementById('mtp-tp2-pct').value)||30;
+  const tp3pct = Math.max(0, 100 - tp1pct - tp2pct);
+  const useBE  = document.getElementById('mtp-be').checked;
+  const bal    = parseFloat(document.getElementById('cgc-bal').value)||10000;
+  const rPct   = parseFloat(document.getElementById('cgc-risk').value)||1;
+  const isLong = mtpDirection === 'long';
+
+  const remEl = document.getElementById('mtp-tp3-pct-label');
+  const rem2El = document.getElementById('mtp-tp2-remaining');
+  if(remEl) remEl.textContent = tp3pct.toFixed(0)+'% of position';
+  if(rem2El) rem2El.textContent = tp3pct.toFixed(0)+'% runs to TP3';
+
+  const slDist = Math.abs(entry - sl);
+  if(slDist === 0) return;
+  const riskAmt = bal * rPct / 100;
+  const r1 = Math.abs(tp1p - entry) / slDist;
+  const r2 = Math.abs(tp2p - entry) / slDist;
+  const r3 = Math.abs(tp3p - entry) / slDist;
+  const blendedR = (r1*tp1pct + r2*tp2pct + r3*tp3pct) / 100;
+  const beWR = 1 / (1 + blendedR) * 100;
+  const pnl1 = riskAmt * r1 * (tp1pct/100);
+  const pnl2 = riskAmt * r2 * (tp2pct/100);
+  const pnl3 = riskAmt * r3 * (tp3pct/100);
+  const fullWin = pnl1 + pnl2 + pnl3;
+  const fmt = v => '$' + Math.round(v).toLocaleString();
+  const setEl = (id,v) => { const e=document.getElementById(id); if(e) e.textContent=v; };
+
+  setEl('mtp-risk-amt', fmt(riskAmt));
+  setEl('mtp-blended-rr', '1:'+blendedR.toFixed(2));
+  setEl('mtp-be-wr', beWR.toFixed(1)+'%');
+  setEl('mtp-full-win', fmt(fullWin));
+  setEl('mtp-sync-rr', 'R:R 1:'+blendedR.toFixed(2));
+
+  const tbody = document.getElementById('mtp-table-body');
+  if(tbody){
+    const rs = (bg) => `display:grid;grid-template-columns:80px 1fr 1fr 1fr 1fr 1fr;padding:10px 14px;border-bottom:1px solid var(--border);background:${bg};`;
+    const cl = (t,c='var(--text2)') => `<div style="font-size:15px;color:${c};font-weight:400;">${t}</div>`;
+    const mv = (p) => ((Math.abs(p-entry)/entry)*100).toFixed(2)+'%';
+    tbody.innerHTML = `
+      <div style="${rs('#1a0505')}">${cl('STOP','var(--red)')}${cl('$'+sl.toLocaleString(),'var(--red)')}${cl('100%','var(--red)')}${cl('-'+mv(sl),'var(--red)')}${cl('1R loss','var(--red)')}${cl('-'+fmt(riskAmt),'var(--red)')}</div>
+      <div style="${rs('transparent')}">${cl('TP1','var(--green)')}${cl('$'+tp1p.toLocaleString(),'var(--green)')}${cl(tp1pct.toFixed(0)+'%','var(--green)')}${cl('+'+mv(tp1p),'var(--green)')}${cl(r1.toFixed(2)+'R','var(--green)')}${cl('+'+fmt(pnl1),'var(--green)')}</div>
+      ${useBE?`<div style="${rs('#050505')}">${cl('→ SL to BE','#555')}${cl('$'+entry.toLocaleString(),'#555')}${cl('remaining','#555')}${cl('breakeven','#555')}${cl('0R','#555')}${cl('$0','#555')}</div>`:''}
+      <div style="${rs('transparent')}">${cl('TP2','#22d3ee')}${cl('$'+tp2p.toLocaleString(),'#22d3ee')}${cl(tp2pct.toFixed(0)+'%','#22d3ee')}${cl('+'+mv(tp2p),'#22d3ee')}${cl(r2.toFixed(2)+'R','#22d3ee')}${cl('+'+fmt(pnl2),'#22d3ee')}</div>
+      <div style="${rs('#0a0a1a')}">${cl('TP3 runner','#a855f7')}${cl('$'+tp3p.toLocaleString(),'#a855f7')}${cl(tp3pct.toFixed(0)+'%','#a855f7')}${cl('+'+mv(tp3p),'#a855f7')}${cl(r3.toFixed(2)+'R','#a855f7')}${cl('+'+fmt(pnl3),'#a855f7')}</div>
+      <div style="${rs('#021a08')}">${cl('TOTAL WIN','var(--green)')}${cl('','var(--green)')}${cl('100%','var(--green)')}${cl('','var(--green)')}${cl(blendedR.toFixed(2)+'R avg','var(--green)')}${cl('+'+fmt(fullWin),'var(--green)')}</div>`;
+  }
+
+  mtpDraw(entry, sl, tp1p, tp2p, tp3p, tp1pct, tp2pct, tp3pct, r1, r2, r3, isLong);
+}
+
+function mtpDraw(entry, sl, tp1, tp2, tp3, tp1pct, tp2pct, tp3pct, r1, r2, r3, isLong){
+  const canvas = document.getElementById('mtp-canvas');
+  if(!canvas) return;
+  const dpr = window.devicePixelRatio||1;
+  const W = canvas.offsetWidth||380;
+  const H = 340;
+  canvas.width=W*dpr; canvas.height=H*dpr;
+  const ctx = canvas.getContext('2d');
+  ctx.scale(dpr,dpr);
+  ctx.fillStyle='#0d1117'; ctx.fillRect(0,0,W,H);
+
+  const prices=[sl,entry,tp1,tp2,tp3];
+  const minP=Math.min(...prices)*0.9985;
+  const maxP=Math.max(...prices)*1.0015;
+  const pad={top:24,bottom:16,left:72,right:90};
+  const cH=H-pad.top-pad.bottom;
+  const cW=W-pad.left-pad.right;
+  const scY=p=>pad.top+cH-((p-minP)/(maxP-minP))*cH;
+
+  // Zone fills
+  const entryY=scY(entry), slY=scY(sl), tp1Y=scY(tp1), tp2Y=scY(tp2), tp3Y=scY(tp3);
+  ctx.fillStyle='rgba(239,68,68,0.12)'; ctx.fillRect(pad.left,Math.min(entryY,slY),cW,Math.abs(entryY-slY));
+  ctx.fillStyle='rgba(34,197,94,0.10)'; ctx.fillRect(pad.left,Math.min(entryY,tp1Y),cW,Math.abs(entryY-tp1Y));
+  ctx.fillStyle='rgba(34,211,238,0.07)'; ctx.fillRect(pad.left,Math.min(tp1Y,tp2Y),cW,Math.abs(tp1Y-tp2Y));
+  ctx.fillStyle='rgba(168,85,247,0.05)'; ctx.fillRect(pad.left,Math.min(tp2Y,tp3Y),cW,Math.abs(tp2Y-tp3Y));
+
+  // Price levels
+  const levels=[
+    {p:sl,   c:'#ef4444', lbl:'STOP', r:'−1R',           pct:''},
+    {p:entry,c:'#fbbf24', lbl:'ENTRY',r:'$'+Math.round(entry).toLocaleString(), pct:''},
+    {p:tp1,  c:'#22c55e', lbl:'TP1',  r:r1.toFixed(2)+'R', pct:tp1pct+'%'},
+    {p:tp2,  c:'#22d3ee', lbl:'TP2',  r:r2.toFixed(2)+'R', pct:tp2pct+'%'},
+    {p:tp3,  c:'#a855f7', lbl:'TP3',  r:r3.toFixed(2)+'R', pct:tp3pct.toFixed(0)+'%'},
+  ];
+  levels.forEach(l=>{
+    const y=scY(l.p);
+    ctx.strokeStyle=l.c; ctx.lineWidth=l.lbl==='ENTRY'?2:1.5;
+    ctx.setLineDash(l.lbl==='ENTRY'?[]:[5,3]);
+    ctx.beginPath(); ctx.moveTo(pad.left,y); ctx.lineTo(W-pad.right,y); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle=l.c; ctx.font='bold 10px monospace'; ctx.textAlign='right';
+    ctx.fillText(l.lbl, pad.left-5, y+4);
+    ctx.font='10px monospace'; ctx.textAlign='left';
+    ctx.fillText(l.r, W-pad.right+6, y+4);
+    if(l.pct){ ctx.fillStyle='#666'; ctx.font='9px monospace'; ctx.fillText(l.pct, W-pad.right+6, y+15); }
+  });
+
+  // Candle
+  const cx=pad.left+cW/2-10;
+  ctx.fillStyle=isLong?'rgba(34,197,94,0.4)':'rgba(239,68,68,0.4)';
+  ctx.strokeStyle=isLong?'#22c55e':'#ef4444'; ctx.lineWidth=1.5;
+  const top=Math.min(entryY,slY)+6, ht=Math.max(8,Math.abs(entryY-slY)-12);
+  ctx.fillRect(cx,top,20,ht); ctx.strokeRect(cx,top,20,ht);
+  // Arrow
+  ctx.fillStyle=isLong?'#22c55e':'#ef4444';
+  ctx.font='bold 16px monospace'; ctx.textAlign='center';
+  ctx.fillText(isLong?'▲':'▼', cx+10, isLong?tp1Y-10:tp1Y+18);
+}
+
+['mtp-entry','mtp-sl','mtp-tp1','mtp-tp2','mtp-tp3','mtp-tp1-pct','mtp-tp2-pct','mtp-be'].forEach(id=>{
+  const el=document.getElementById(id);
+  if(el) el.addEventListener('input', mtpUpdate);
+});
+// Also update diagram when balance or risk changes
+['cgc-bal','cgc-risk'].forEach(id=>{
+  const el=document.getElementById(id);
+  if(el) el.addEventListener('input', mtpUpdate);
+});
+mtpUpdate();
 
 ['cgc-bal','cgc-risk','cgc-rr','cgc-wr','cgc-tpw','cgc-years'].forEach(id=>{
   const el = document.getElementById(id);
