@@ -1698,19 +1698,19 @@ body{background:var(--black);color:var(--text);font-family:var(--FB);font-size:1
 
       <!-- TP BREAKDOWN TABLE -->
       <div style="border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:16px;">
-        <div style="display:grid;grid-template-columns:80px 1fr 1fr 1fr 1fr 1fr;background:var(--surface3);padding:10px 14px;border-bottom:1px solid var(--border);">
+        <div style="display:grid;grid-template-columns:80px 1fr 0.9fr 0.9fr 1.3fr 1fr;background:var(--surface3);padding:10px 14px;border-bottom:1px solid var(--border);">
           <div style="font-family:var(--FM);font-size:10px;color:var(--text3);letter-spacing:1px;">LEVEL</div>
           <div style="font-family:var(--FM);font-size:10px;color:var(--text3);letter-spacing:1px;">PRICE</div>
           <div style="font-family:var(--FM);font-size:10px;color:var(--text3);letter-spacing:1px;">% POSITION</div>
           <div style="font-family:var(--FM);font-size:10px;color:var(--text3);letter-spacing:1px;">MOVE</div>
-          <div style="font-family:var(--FM);font-size:10px;color:var(--text3);letter-spacing:1px;">R MULTIPLE</div>
+          <div style="font-family:var(--FM);font-size:10px;color:var(--text3);letter-spacing:1px;">R CONTRIBUTION</div>
           <div style="font-family:var(--FM);font-size:10px;color:var(--text3);letter-spacing:1px;">P&amp;L ($)</div>
         </div>
         <div id="mtp-table-body"></div>
       </div>
 
       <div style="padding:12px 16px;background:var(--surface3);border-radius:8px;border-left:3px solid var(--accent);">
-        <div style="font-size:12px;color:var(--text3);font-weight:400;line-height:1.6;">The blended R:R is the weighted average across all take-profit levels based on the % of position at each. Click "USE THIS R:R ↑" to push the blended R:R into the compound calculator — the equity curve and year-by-year projections will immediately reflect your actual exit strategy rather than a single-exit assumption.</div>
+        <div style="font-size:12px;color:var(--text3);font-weight:400;line-height:1.6;"><strong style="color:var(--text2);">How the blended R:R works:</strong> each take-profit's R-distance (how far it sits from entry, measured in multiples of your original 1R risk) is multiplied by the % of position that exits there. That gives each level's <em>contribution</em> to the trade's total R:R. The contributions sum to the blended figure — the true risk-to-reward of the whole multi-TP trade, where you risk 1R total and scale out. A standalone "TP2 = 7.77R" would only be the trade's R:R if you exited 100% there and took nothing at TP1. Because you scale out, what matters is the blended total. Click "USE THIS R:R ↑" to push it into the compound calculator above.</div>
       </div>
     </div>
 
@@ -3451,16 +3451,21 @@ function mtpUpdate(){
 
   const tbody = document.getElementById('mtp-table-body');
   if(tbody){
-    const rs = (bg) => `display:grid;grid-template-columns:80px 1fr 1fr 1fr 1fr 1fr;padding:10px 14px;border-bottom:1px solid var(--border);background:${bg};`;
+    const rs = (bg) => `display:grid;grid-template-columns:80px 1fr 0.9fr 0.9fr 1.3fr 1fr;padding:10px 14px;border-bottom:1px solid var(--border);background:${bg};`;
     const cl = (t,c='var(--text2)') => `<div style="font-size:15px;color:${c};font-weight:400;">${t}</div>`;
+    const cl2 = (main,sub,c='var(--text2)') => `<div style="font-size:15px;color:${c};font-weight:400;">${main}<span style="font-size:11px;color:var(--text3);"> ${sub}</span></div>`;
     const mv = (p) => ((Math.abs(p-entry)/entry)*100).toFixed(2)+'%';
+    // Weighted contribution to blended R = distance-R × position fraction
+    const c1 = r1 * tp1pct/100;
+    const c2 = r2 * tp2pct/100;
+    const c3 = r3 * tp3pct/100;
     tbody.innerHTML = `
-      <div style="${rs('#1a0505')}">${cl('STOP','var(--red)')}${cl('$'+sl.toLocaleString(),'var(--red)')}${cl('100%','var(--red)')}${cl('-'+mv(sl),'var(--red)')}${cl('1R loss','var(--red)')}${cl('-'+fmt(riskAmt),'var(--red)')}</div>
-      <div style="${rs('transparent')}">${cl('TP1','var(--green)')}${cl('$'+tp1p.toLocaleString(),'var(--green)')}${cl(tp1pct.toFixed(0)+'%','var(--green)')}${cl('+'+mv(tp1p),'var(--green)')}${cl(r1.toFixed(2)+'R','var(--green)')}${cl('+'+fmt(pnl1),'var(--green)')}</div>
-      ${useBE?`<div style="${rs('#050505')}">${cl('→ SL to BE','#555')}${cl('$'+entry.toLocaleString(),'#555')}${cl('remaining','#555')}${cl('breakeven','#555')}${cl('0R','#555')}${cl('$0','#555')}</div>`:''}
-      <div style="${rs('transparent')}">${cl('TP2','#22d3ee')}${cl('$'+tp2p.toLocaleString(),'#22d3ee')}${cl(tp2pct.toFixed(0)+'%','#22d3ee')}${cl('+'+mv(tp2p),'#22d3ee')}${cl(r2.toFixed(2)+'R','#22d3ee')}${cl('+'+fmt(pnl2),'#22d3ee')}</div>
-      <div style="${rs('#0a0a1a')}">${cl('TP3 runner','#a855f7')}${cl('$'+tp3p.toLocaleString(),'#a855f7')}${cl(tp3pct.toFixed(0)+'%','#a855f7')}${cl('+'+mv(tp3p),'#a855f7')}${cl(r3.toFixed(2)+'R','#a855f7')}${cl('+'+fmt(pnl3),'#a855f7')}</div>
-      <div style="${rs('#021a08')}">${cl('TOTAL WIN','var(--green)')}${cl('','var(--green)')}${cl('100%','var(--green)')}${cl('','var(--green)')}${cl(blendedR.toFixed(2)+'R avg','var(--green)')}${cl('+'+fmt(fullWin),'var(--green)')}</div>`;
+      <div style="${rs('#1a0505')}">${cl('STOP','var(--red)')}${cl('$'+sl.toLocaleString(),'var(--red)')}${cl('100%','var(--red)')}${cl('-'+mv(sl),'var(--red)')}${cl('−1.00R','var(--red)')}${cl('-'+fmt(riskAmt),'var(--red)')}</div>
+      <div style="${rs('transparent')}">${cl('TP1','var(--green)')}${cl('$'+tp1p.toLocaleString(),'var(--green)')}${cl(tp1pct.toFixed(0)+'%','var(--green)')}${cl('+'+mv(tp1p),'var(--green)')}${cl2('+'+c1.toFixed(2)+'R','('+r1.toFixed(1)+'R×'+tp1pct.toFixed(0)+'%)','var(--green)')}${cl('+'+fmt(pnl1),'var(--green)')}</div>
+      ${useBE?`<div style="${rs('#050505')}">${cl('→ SL to BE','#555')}${cl('$'+entry.toLocaleString(),'#555')}${cl('remaining','#555')}${cl('breakeven','#555')}${cl('0.00R','#555')}${cl('$0','#555')}</div>`:''}
+      <div style="${rs('transparent')}">${cl('TP2','#22d3ee')}${cl('$'+tp2p.toLocaleString(),'#22d3ee')}${cl(tp2pct.toFixed(0)+'%','#22d3ee')}${cl('+'+mv(tp2p),'#22d3ee')}${cl2('+'+c2.toFixed(2)+'R','('+r2.toFixed(1)+'R×'+tp2pct.toFixed(0)+'%)','#22d3ee')}${cl('+'+fmt(pnl2),'#22d3ee')}</div>
+      <div style="${rs('#0a0a1a')}">${cl('TP3 runner','#a855f7')}${cl('$'+tp3p.toLocaleString(),'#a855f7')}${cl(tp3pct.toFixed(0)+'%','#a855f7')}${cl('+'+mv(tp3p),'#a855f7')}${cl2('+'+c3.toFixed(2)+'R','('+r3.toFixed(1)+'R×'+tp3pct.toFixed(0)+'%)','#a855f7')}${cl('+'+fmt(pnl3),'#a855f7')}</div>
+      <div style="${rs('#021a08')}">${cl('BLENDED','var(--green)')}${cl('','var(--green)')}${cl('100%','var(--green)')}${cl('','var(--green)')}${cl('+'+blendedR.toFixed(2)+'R total','var(--green)')}${cl('+'+fmt(fullWin),'var(--green)')}</div>`;
   }
 
   mtpDraw(entry, sl, tp1p, tp2p, tp3p, tp1pct, tp2pct, tp3pct, r1, r2, r3, isLong);
@@ -3496,9 +3501,9 @@ function mtpDraw(entry, sl, tp1, tp2, tp3, tp1pct, tp2pct, tp3pct, r1, r2, r3, i
   const levels=[
     {p:sl,   c:'#ef4444', lbl:'STOP', r:'−1R',           pct:''},
     {p:entry,c:'#fbbf24', lbl:'ENTRY',r:'$'+Math.round(entry).toLocaleString(), pct:''},
-    {p:tp1,  c:'#22c55e', lbl:'TP1',  r:r1.toFixed(2)+'R', pct:tp1pct+'%'},
-    {p:tp2,  c:'#22d3ee', lbl:'TP2',  r:r2.toFixed(2)+'R', pct:tp2pct+'%'},
-    {p:tp3,  c:'#a855f7', lbl:'TP3',  r:r3.toFixed(2)+'R', pct:tp3pct.toFixed(0)+'%'},
+    {p:tp1,  c:'#22c55e', lbl:'TP1',  r:r1.toFixed(2)+'R dist', pct:tp1pct+'%'},
+    {p:tp2,  c:'#22d3ee', lbl:'TP2',  r:r2.toFixed(2)+'R dist', pct:tp2pct+'%'},
+    {p:tp3,  c:'#a855f7', lbl:'TP3',  r:r3.toFixed(2)+'R dist', pct:tp3pct.toFixed(0)+'%'},
   ];
   levels.forEach(l=>{
     const y=scY(l.p);
